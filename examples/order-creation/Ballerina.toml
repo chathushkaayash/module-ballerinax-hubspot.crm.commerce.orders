@@ -1,0 +1,8 @@
+[package]
+org = "roshane"
+name = "order_creation"
+version = "0.1.0"
+distribution = "2201.10.3"
+
+[build-options]
+observabilityIncluded = true

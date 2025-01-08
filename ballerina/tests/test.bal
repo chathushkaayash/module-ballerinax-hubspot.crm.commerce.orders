@@ -1,7 +1,7 @@
 import ballerina/test;
 import ballerina/oauth2;
+// import ballerina/io;
 import ballerina/http;
-import ballerina/io;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
@@ -41,7 +41,6 @@ final Client baseClient = check new Client(config, serviceUrl = "https://api.hub
   };
   CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/orders/search.post(payload = payload);
     test:assertTrue(response.total >= 0);
-    
 }
 
 @test:Config {}
@@ -49,7 +48,7 @@ function  testPostOrdersBatchRead() returns error?{
 
   BatchReadInputSimplePublicObjectId payload = {
   "propertiesWithHistory": [
-    "string"
+    "hs_lastmodifieddate"
   ],
   "inputs": [
     {
@@ -80,7 +79,7 @@ function testPatchObjectsOrdersByOrderId() returns error? {
   string orderId = "394961395351";
   SimplePublicObjectInput payload = 
     {
-    "objectWriteTraceId": "string",
+    "objectWriteTraceId": "10",
     "properties": {
       "hs_lastmodifieddate": "2024-03-27T20:03:05.890Z",
       "hs_shipping_tracking_number": "123098521091"
@@ -91,7 +90,6 @@ function testPatchObjectsOrdersByOrderId() returns error? {
   test:assertFalse(response?.id is "", "id should not be empty");
   test:assertFalse(response?.createdAt is "", "creation time should not be empty");
   test:assertFalse(response?.updatedAt is "", "updated time should not be empty");
-
 }
 
 @test:Config {}
@@ -109,20 +107,21 @@ function  testPostordersBatchUpsert() returns error?{
   BatchInputSimplePublicObjectBatchInputUpsert payload = {
     "inputs": [
       {
-        "idProperty": "string",
-        "objectWriteTraceId": "string",
-        "id": "21",
+        "idProperty": "my_unique_property_1",
+        "id": "unique_value",
         "properties": {
-          "additionalprop1": "string",
-          "additionalprop2": "string",
-          "additionalprop3": "string"
+          "hs_billing_address_city": "mumbai",
+          "hs_billing_address_country": "india",
+          "hs_currency_code": "USD"
+
         }
       }
     ]
   };
   BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check baseClient->/orders/batch/upsert.post(payload = payload);
-  test:assertTrue(true);
-  io:println(response);
+  test:assertTrue(response.status == "COMPLETE");
+  test:assertFalse(response?.completedAt is "", "creation time should not be empty");
+  test:assertFalse(response?.startedAt is "", "start time should not be empty");
   }
 
 @test:Config {}
@@ -136,19 +135,16 @@ function  testPostOrdersBatchCreate() returns error?{
           "types": [
             {
               "associationCategory": "HUBSPOT_DEFINED",
-              "associationTypeId": 0
+              "associationTypeId": 512
             }
           ],
           "to": {
-            "id": "21"
+            "id": "31440573867"
           }
         }
       ],
-      "objectWriteTraceId": "34",
       "properties": {
-        "additionalprop1": "string",
-        "additionalprop2": "string",
-        "additionalprop3": "string"
+        "hs_currency_code": "USD"
       }
     }
   ]
@@ -164,19 +160,17 @@ function testPostObjectsOrdersBatchUpdate() returns error?{
     {
       "inputs": [
         {
-          "idProperty": "string",
-          "objectWriteTraceId": "string",
-          "id": "21",
+        //   "idProperty": "Unique ID for System A",
+          "id": "395267361897",
           "properties": {
-            "additionalprop1": "string",
-            "additionalprop2": "string",
-            "additionalprop3": "string"
+            "hs_currency_code": "USD"
           }
         }
       ]
     };
-  BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = check baseClient->/orders/batch/update.post(payload = payload);
-  test:assertTrue(true);
+  BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/orders/batch/update.post(payload = payload);
+  test:assertFalse(response.completedAt is "", "completedAt should not be empty");
+  test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
 
 @test:Config {}
@@ -208,14 +202,21 @@ function  testPostObjectsOrders() returns error? {
     "hs_shipping_address_street": "123 Fake Street"
       }
     };
-  SimplePublicObject|error response = check baseClient->/orders.post(payload = payload);
-  test:assertTrue(true);
+  SimplePublicObject response = check baseClient->/orders.post(payload = payload);
+
+  test:assertFalse(response.createdAt is "", "createdAt should not be empty");
+  test:assertFalse(response.updatedAt is "", "updateAt should not be empty");
+
 }
 
 @test:Config {}
 function  testGetObjectsOrders() returns error? {
-  CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error response = check baseClient->/orders;
-  test:assertTrue(true);
+  CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/orders;
+  
+  foreach SimplePublicObjectWithAssociations result in response.results {
+    test:assertFalse(result.createdAt is "", "createdAt should not be empty");
+    test:assertFalse(result.updatedAt is "", "updatedAt should not be empty");
+  }
 }
 
 @test:Config {}
@@ -223,10 +224,10 @@ function  testPostOrdersBatchArchive() returns error?{
   BatchInputSimplePublicObjectId payload = {
     "inputs": [
       {
-        "id": "string"
+        "id": "10"
       }
     ]
   };
-  http:Response|error response = check baseClient->/orders/batch/archive.post(payload = payload);
-  test:assertTrue(true);
+  http:Response response = check baseClient->/orders/batch/archive.post(payload = payload);
+  test:assertTrue(response.statusCode == 204);
 }

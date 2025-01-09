@@ -195,10 +195,10 @@ The `HubSpot CRM Commerce Orders` connector provides practical examples illustra
 
 4. Export Github Personal access token with read package permissions as follows,
 
-   ```bash
-   export packageUser=<Username>
-   export packagePAT=<Personal access token>
-   ```
+    ```bash
+    export packageUser=<Username>
+    export packagePAT=<Personal access token>
+    ```
 
 ### Build options
 
@@ -242,9 +242,9 @@ Execute the commands below to build from the source.
 
 7. Publish the generated artifacts to the local Ballerina Central repository:
 
-   ```bash
-   ./gradlew clean build -PpublishToLocalCentral=true
-   ```
+    ```bash
+    ./gradlew clean build -PpublishToLocalCentral=true
+    ```
 
 8. Publish the generated artifacts to the Ballerina Central repository:
 
@@ -264,7 +264,7 @@ All the contributors are encouraged to read the [Ballerina Code of Conduct](http
 
 ## Useful links
 
-- For more information go to the [`hubspot.crm.commerce.orders` package](https://central.ballerina.io/ballerinax/hubspot.crm.commerce.orders/latest).
-- For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
-- Chat live with us via our [Discord server](https://discord.gg/ballerinalang).
-- Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
+* For more information go to the [`hubspot.crm.commerce.orders` package](https://central.ballerina.io/ballerinax/hubspot.crm.commerce.orders/latest).
+* For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
+* Chat live with us via our [Discord server](https://discord.gg/ballerinalang).
+* Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.

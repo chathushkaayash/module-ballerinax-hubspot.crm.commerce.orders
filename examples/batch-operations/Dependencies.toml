@@ -85,10 +85,6 @@ dependencies = [
 	{org = "ballerina", name = "time"},
 	{org = "ballerina", name = "url"}
 ]
-modules = [
-	{org = "ballerina", packageName = "http", moduleName = "http"},
-	{org = "ballerina", packageName = "http", moduleName = "http.httpscerr"}
-]
 
 [[package]]
 org = "ballerina"
@@ -304,17 +300,16 @@ modules = [
 ]
 
 [[package]]
-org = "wso2"
-name = "order_creation"
+org = "roshane"
+name = "batch_operations"
 version = "0.1.0"
 dependencies = [
-	{org = "ballerina", name = "http"},
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "oauth2"},
 	{org = "ballerinai", name = "observe"},
 	{org = "ballerinax", name = "hubspot.crm.commerce.orders"}
 ]
 modules = [
-	{org = "wso2", packageName = "order_creation", moduleName = "order_creation"}
+	{org = "roshane", packageName = "batch_operations", moduleName = "batch_operations"}
 ]
 

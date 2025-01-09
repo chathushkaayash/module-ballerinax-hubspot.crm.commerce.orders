@@ -16,43 +16,43 @@
 
 import ballerina/test;
 
-final Client mockClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects");    
+final Client mockClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects");
 
-@test:Config{}
-isolated function mockTestForCreatingABatchOfOrders() returns error?{
+@test:Config {}
+isolated function mockTestForCreatingABatchOfOrders() returns error? {
     BatchResponseSimplePublicObject|error response = check mockClient->/orders/batch/create.post(
         {
             "inputs": [
                 {
-                "associations": [
-                    {
-                    "types": [
+                    "associations": [
                         {
-                            "associationCategory": "HUBSPOT_DEFINED",
-                            "associationTypeId": 512
+                            "types": [
+                                {
+                                    "associationCategory": "HUBSPOT_DEFINED",
+                                    "associationTypeId": 512
+                                }
+                            ],
+                            "to": {
+                                "id": "31440573867"
+                            }
                         }
                     ],
-                    "to": {
-                        "id": "31440573867"
+                    "properties": {
+                        "hs_currency_code": "USD"
                     }
-                    }
-                ],
-                "properties": {
-                    "hs_currency_code": "USD"
-                }
                 }
             ]
         }
     );
     if (response is error) {
         test:assertFail("Error occurred while creating a batch of orders");
-    }else{
-        test:assertEquals(response.status, "COMPLETE"); 
+    } else {
+        test:assertEquals(response.status, "COMPLETE");
     }
 }
 
-@test:Config{}
-isolated function mockTestForCreatingBatchOfOrdersByUniqueProperty() returns error?{
+@test:Config {}
+isolated function mockTestForCreatingBatchOfOrdersByUniqueProperty() returns error? {
     BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check mockClient->/orders/batch/upsert.post(
         payload = {
             "inputs": [
@@ -69,25 +69,25 @@ isolated function mockTestForCreatingBatchOfOrdersByUniqueProperty() returns err
         }
     );
     test:assertEquals(response.results[0],
-        {
-            "createdAt": "2025-01-07T06:02:00.230Z",
-            "archived": false,
-            "new": false,
-            "id": "395261910382",
-            "properties": {
-                "hs_currency_code": "USD",
-                "hs_lastmodifieddate": "2025-01-07T06:02:00.964Z",
-                "hs_object_source_id": "6457564",
-                "hs_createdate": "2025-01-07T06:02:00.230Z",
-                "hs_object_id": "395261910382",
-                "hs_billing_address_city": "mumbai",
-                "hs_object_source": "INTEGRATION",
-                "hs_billing_address_country": "india",
-                "hs_object_source_label": "INTEGRATION"
-            },
-            "updatedAt": "2025-01-07T06:02:00.964Z"
-        }
+            {
+                "createdAt": "2025-01-07T06:02:00.230Z",
+                "archived": false,
+                "new": false,
+                "id": "395261910382",
+                "properties": {
+                    "hs_currency_code": "USD",
+                    "hs_lastmodifieddate": "2025-01-07T06:02:00.964Z",
+                    "hs_object_source_id": "6457564",
+                    "hs_createdate": "2025-01-07T06:02:00.230Z",
+                    "hs_object_id": "395261910382",
+                    "hs_billing_address_city": "mumbai",
+                    "hs_object_source": "INTEGRATION",
+                    "hs_billing_address_country": "india",
+                    "hs_object_source_label": "INTEGRATION"
+                },
+                "updatedAt": "2025-01-07T06:02:00.964Z"
+            }
     );
-    test:assertEquals(response.status, "COMPLETE"); 
+    test:assertEquals(response.status, "COMPLETE");
 }
 

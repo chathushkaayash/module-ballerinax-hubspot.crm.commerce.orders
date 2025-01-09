@@ -17,10 +17,10 @@
 import ballerina/http;
 import ballerina/log;
 
-listener http:Listener httpListener = new(9090);
+listener http:Listener httpListener = new (9090);
 
 http:Service mockService = service object {
-    resource function post crm/v3/objects/orders/batch/create(@http:Payload BatchInputSimplePublicObjectInputForCreate payload) returns BatchResponseSimplePublicObject|error{
+    resource function post crm/v3/objects/orders/batch/create(@http:Payload BatchInputSimplePublicObjectInputForCreate payload) returns BatchResponseSimplePublicObject|error {
         return {
             "completedAt": "2025-01-08T16:43:05.686Z",
             "startedAt": "2025-01-08T16:43:05.384Z",
@@ -46,7 +46,7 @@ http:Service mockService = service object {
         };
     }
 
-    resource function post crm/v3/objects/orders/batch/upsert(@http:Payload BatchInputSimplePublicObjectBatchInputUpsert payload) returns BatchResponseSimplePublicUpsertObject|error{
+    resource function post crm/v3/objects/orders/batch/upsert(@http:Payload BatchInputSimplePublicObjectBatchInputUpsert payload) returns BatchResponseSimplePublicUpsertObject|error {
         return {
             "completedAt": "2025-01-08T16:43:06.213Z",
             "startedAt": "2025-01-08T16:43:06.140Z",
@@ -72,10 +72,10 @@ http:Service mockService = service object {
             ],
             "status": "COMPLETE"
         };
-    }; 
+    };
 };
 
-function init() returns error?{
+function init() returns error? {
     log:printInfo("Initializing mock service");
     check httpListener.attach(mockService, "/");
     check httpListener.'start();

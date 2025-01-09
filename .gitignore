@@ -58,5 +58,5 @@ build
 docker.env
 
 # Ignore examples files
-examples/order-creation/target/
-examples/order-creation/generated/
+**/target/
+**/generated/

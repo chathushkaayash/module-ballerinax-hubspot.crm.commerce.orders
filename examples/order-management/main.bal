@@ -58,21 +58,21 @@ function handleOrderManagement(orders:Client hubspotClient) returns error? {
 function createOrder(orders:Client hubspotClient) returns string|error? {
     orders:SimplePublicObjectInputForCreate newOrder =
     {
-        "associations": [
+        associations: [
             {
-                "to": {
-                    "id": "31440573867"
+                to: {
+                    id: "31440573867"
                 },
-                "types": [
+                types: [
                     {
-                        "associationCategory": "HUBSPOT_DEFINED",
-                        "associationTypeId": 512
+                        associationCategory: "HUBSPOT_DEFINED",
+                        associationTypeId: 512
                     }
                 ]
             }
         ],
-        "objectWriteTraceId": null,
-        "properties": {
+        objectWriteTraceId: null,
+        properties: {
             "hs_order_name": "Camping supplies",
             "hs_currency_code": "USD",
             "hs_source_store": "REI - Portland",
@@ -124,35 +124,3 @@ function deleteOrder(orders:Client hubspotClient, string orderId) returns error?
     }
 }
 
-// // Use Case: Search Operations
-// function handleSearchOperations(orders:Client client) {
-//     io:println("Starting Search Operations...");
-
-//     check searchOrders(client);
-
-//     io:println("Search Operations Completed.");
-// }
-
-// function searchOrders(orders:Client client) returns error? {
-//     orders:PublicObjectSearchRequest searchRequest = {
-//         query: "example",
-//         properties: ["hs_order_name", "hs_currency_code"],
-//         filterGroups: [
-//             {
-//                 filters: [
-//                     {
-//                         propertyName: "hs_order_name",
-//                         operator: "EQ",
-//                         value: "New Order Example"
-//                     }
-//                 ]
-//             }
-//         ]
-//     };
-//     var response = client->/orders/search.post(searchRequest);
-//     if response is orders:CollectionResponseWithTotalSimplePublicObjectForwardPaging {
-//         io:println("Search results: ", response.results.length(), " orders found.");
-//     } else {
-//         io:println("No orders found matching search criteria.");
-//     }
-// }

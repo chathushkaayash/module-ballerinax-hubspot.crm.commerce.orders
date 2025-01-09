@@ -56,22 +56,22 @@ function handleBatchOperations(orders:Client hubspotClient) returns error? {
 // Function to create a batch of orders
 function batchCreateOrders(orders:Client hubspotClient) returns error? {
     orders:BatchInputSimplePublicObjectInputForCreate batchCreateRequest = {
-        "inputs": [
+        inputs: [
             {
-                "associations": [
+                associations: [
                     {
-                        "types": [
+                        types: [
                             {
                                 "associationCategory": "HUBSPOT_DEFINED",
                                 "associationTypeId": 512
                             }
                         ],
-                        "to": {
-                            "id": "31440573867"
+                        to: {
+                            id: "31440573867"
                         }
                     }
                 ],
-                "properties": {
+                properties: {
                     "hs_currency_code": "USD"
                 }
             }

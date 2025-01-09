@@ -11,9 +11,9 @@ public function main() returns error?{
     // Create a new client using the provided configuration
     orders:ConnectionConfig config = {
         auth: {
-            clientId: clientId,
-            clientSecret: clientSecret,
-            refreshToken: refreshToken,
+            clientId,
+            clientSecret,
+            refreshToken,
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };

@@ -8,9 +8,9 @@ configurable string clientSecret = ?;
 configurable string refreshToken = ?;
 
 OAuth2RefreshTokenGrantConfig auth = {
-       clientId: clientId,
-       clientSecret: clientSecret,
-       refreshToken: refreshToken,
+       clientId,
+       clientSecret,
+       refreshToken,
        credentialBearer: oauth2:POST_BODY_BEARER
 };
 

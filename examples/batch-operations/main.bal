@@ -33,7 +33,8 @@ public function main() returns error? {
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };
-    final orders:Client hubspotClient = check new orders:Client(config, serviceUrl = "https://api.hubapi.com/crm/v3/objects");
+    final orders:Client hubspotClient = check new orders:Client(
+        config, serviceUrl = "https://api.hubapi.com/crm/v3/objects");
     io:println("HubSpot Client initialized successfully.");
 
     // Handle batch operations
@@ -78,7 +79,8 @@ function batchCreateOrders(orders:Client hubspotClient) returns error? {
         ]
     };
 
-    orders:BatchResponseSimplePublicObject|error response = hubspotClient->/orders/batch/create.post(batchCreateRequest);
+    orders:BatchResponseSimplePublicObject|error response = 
+        hubspotClient->/orders/batch/create.post(batchCreateRequest);
     if response is orders:BatchResponseSimplePublicObject {
         io:println("Batch of orders created successfully.");
     } else {
@@ -100,7 +102,8 @@ function batchUpdateOrders(orders:Client hubspotClient) returns error? {
         ]
     };
 
-    orders:BatchResponseSimplePublicObject|error response = hubspotClient->/orders/batch/update.post(batchUpdateRequest);
+    orders:BatchResponseSimplePublicObject|error response = 
+        hubspotClient->/orders/batch/update.post(batchUpdateRequest);
     if response is orders:BatchResponseSimplePublicObject {
         io:println("Batch of orders updated successfully.");
     } else {

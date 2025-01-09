@@ -49,7 +49,8 @@ isolated function mockTestForCreatingABatchOfOrders() returns error? {
 
 @test:Config {}
 isolated function mockTestForCreatingBatchOfOrdersByUniqueProperty() returns error? {
-    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check orderClient->/orders/batch/upsert.post(
+    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = 
+        check orderClient->/orders/batch/upsert.post(
         payload = {
             inputs: [
                 {

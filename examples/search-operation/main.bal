@@ -33,7 +33,8 @@ public function main() returns error? {
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };
-    final orders:Client hubspotClient = check new orders:Client(config, serviceUrl = "https://api.hubapi.com/crm/v3/objects");
+    final orders:Client hubspotClient = check new orders:Client(
+        config, serviceUrl = "https://api.hubapi.com/crm/v3/objects");
     io:println("HubSpot Client initialized successfully.");
 
     // Handle search operations
@@ -68,7 +69,8 @@ function searchOrders(orders:Client hubspotClient) returns error? {
         ]
     };
 
-    orders:CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response = hubspotClient->/orders/search.post(searchRequest);
+    orders:CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response = 
+        hubspotClient->/orders/search.post(searchRequest);
     if response is orders:CollectionResponseWithTotalSimplePublicObjectForwardPaging {
         io:println("Search results: ", response.results.length(), " orders found.");
     } else {

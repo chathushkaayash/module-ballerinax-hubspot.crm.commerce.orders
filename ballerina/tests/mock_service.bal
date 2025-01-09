@@ -17,7 +17,8 @@
 import ballerina/http;
 
 service on new http:Listener(9090) {
-    resource function post crm/v3/objects/orders/batch/create(@http:Payload BatchInputSimplePublicObjectInputForCreate payload) returns BatchResponseSimplePublicObject {
+    resource function post crm/v3/objects/orders/batch/create(@http:Payload 
+        BatchInputSimplePublicObjectInputForCreate payload) returns BatchResponseSimplePublicObject {
         return {
             completedAt: "2025-01-08T16:43:05.686Z",
             startedAt: "2025-01-08T16:43:05.384Z",
@@ -43,7 +44,8 @@ service on new http:Listener(9090) {
         };
     }
 
-    resource function post crm/v3/objects/orders/batch/upsert(@http:Payload BatchInputSimplePublicObjectBatchInputUpsert payload) returns BatchResponseSimplePublicUpsertObject {
+    resource function post crm/v3/objects/orders/batch/upsert(@http:Payload 
+        BatchInputSimplePublicObjectBatchInputUpsert payload) returns BatchResponseSimplePublicUpsertObject {
         return {
             completedAt: "2025-01-08T16:43:06.213Z",
             startedAt: "2025-01-08T16:43:06.140Z",

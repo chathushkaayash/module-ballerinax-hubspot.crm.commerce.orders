@@ -30,7 +30,7 @@ OAuth2RefreshTokenGrantConfig auth = {
 };
 
 ConnectionConfig config = {auth: auth};
-final Client baseClient = check new Client(config, serviceUrl = "https://api.hubapi.com/crm/v3/objects");
+final Client baseClient = check new Client(config);
 
 @test:Config {}
 function testPostOrdersSearch() returns error? {
@@ -42,19 +42,20 @@ function testPostOrdersSearch() returns error? {
             "3"
         ],
         properties: ["hs_lastmodifieddate", "hs_createdate", "hs_object_id", "updatedAt"],
-        "filterGroups": [
+        filterGroups: [
             {
-                "filters": [
+                filters: [
                     {
-                        "propertyName": "hs_source_store",
-                        "value": "REI - Portland",
-                        "operator": "EQ"
+                        propertyName: "hs_source_store",
+                        value: "REI - Portland",
+                        operator: "EQ"
                     }
                 ]
             }
         ]
     };
-    CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/orders/search.post(payload = payload);
+    CollectionResponseWithTotalSimplePublicObjectForwardPaging response = 
+        check baseClient->/orders/search.post(payload = payload);
     test:assertTrue(response.total >= 0);
 }
 
@@ -62,18 +63,18 @@ function testPostOrdersSearch() returns error? {
 function testPostOrdersBatchRead() returns error? {
 
     BatchReadInputSimplePublicObjectId payload = {
-        "propertiesWithHistory": [
+        propertiesWithHistory: [
             "hs_lastmodifieddate"
         ],
-        "inputs": [
+        inputs: [
             {
-                "id": "394961395351"
+                id: "394961395351"
             }
         ],
-        "properties": ["hs_lastmodifieddate", "hs_createdate", "hs_object_id", "updatedAt"]
+        properties: ["hs_lastmodifieddate", "hs_createdate", "hs_object_id", "updatedAt"]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/orders/batch/read.post(payload = payload);
-
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = 
+        check baseClient->/orders/batch/read.post(payload = payload);
     if response.status != "PENDING" && response.status != "PROCESSING" && response.status != "CANCELED" && response.status != "COMPLETE" {
         test:assertFail("invalid status type");
     }
@@ -94,14 +95,13 @@ function testPatchObjectsOrdersByOrderId() returns error? {
     string orderId = "394961395351";
     SimplePublicObjectInput payload =
     {
-        "objectWriteTraceId": "10",
-        "properties": {
+        objectWriteTraceId: "10",
+        properties: {
             "hs_lastmodifieddate": "2024-03-27T20:03:05.890Z",
             "hs_shipping_tracking_number": "123098521091"
         }
     };
     SimplePublicObject response = check baseClient->/orders/[orderId].patch(payload = payload);
-
     test:assertFalse(response?.id is "", "id should not be empty");
     test:assertFalse(response?.createdAt is "", "creation time should not be empty");
     test:assertFalse(response?.updatedAt is "", "updated time should not be empty");
@@ -120,11 +120,11 @@ function testGetObjectsOrdersByOrderId() returns error? {
 @test:Config {}
 function testPostordersBatchUpsert() returns error? {
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
-        "inputs": [
+        inputs: [
             {
-                "idProperty": "my_unique_property_1",
-                "id": "unique_value",
-                "properties": {
+                idProperty: "my_unique_property_1",
+                id: "unique_value",
+                properties: {
                     "hs_billing_address_city": "mumbai",
                     "hs_billing_address_country": "india",
                     "hs_currency_code": "USD"
@@ -133,7 +133,8 @@ function testPostordersBatchUpsert() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check baseClient->/orders/batch/upsert.post(payload = payload);
+    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = 
+        check baseClient->/orders/batch/upsert.post(payload = payload);
     test:assertTrue(response.status == "COMPLETE");
     test:assertFalse(response?.completedAt is "", "creation time should not be empty");
     test:assertFalse(response?.startedAt is "", "start time should not be empty");
@@ -143,22 +144,22 @@ function testPostordersBatchUpsert() returns error? {
 function testPostOrdersBatchCreate() returns error? {
 
     BatchInputSimplePublicObjectInputForCreate payload = {
-        "inputs": [
+        inputs: [
             {
-                "associations": [
+                associations: [
                     {
-                        "types": [
+                        types: [
                             {
-                                "associationCategory": "HUBSPOT_DEFINED",
-                                "associationTypeId": 512
+                                associationCategory: "HUBSPOT_DEFINED",
+                                associationTypeId: 512
                             }
                         ],
-                        "to": {
-                            "id": "31440573867"
+                        to: {
+                            id: "31440573867"
                         }
                     }
                 ],
-                "properties": {
+                properties: {
                     "hs_currency_code": "USD"
                 }
             }
@@ -173,17 +174,17 @@ function testPostOrdersBatchCreate() returns error? {
 function testPostObjectsOrdersBatchUpdate() returns error? {
     BatchInputSimplePublicObjectBatchInput payload =
     {
-        "inputs": [
+        inputs: [
             {
-                //   "idProperty": "Unique ID for System A",
-                "id": "395267361897",
-                "properties": {
+                id: "395267361897",
+                properties: {
                     "hs_currency_code": "USD"
                 }
             }
         ]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/orders/batch/update.post(payload = payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = 
+        check baseClient->/orders/batch/update.post(payload = payload);
     test:assertFalse(response.completedAt is "", "completedAt should not be empty");
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
@@ -193,21 +194,21 @@ function testPostObjectsOrders() returns error? {
 
     SimplePublicObjectInputForCreate payload =
     {
-        "associations": [
+        associations: [
             {
-                "to": {
-                    "id": "31440573867"
+                to: {
+                    id: "31440573867"
                 },
-                "types": [
+                types: [
                     {
-                        "associationCategory": "HUBSPOT_DEFINED",
-                        "associationTypeId": 512
+                        associationCategory: "HUBSPOT_DEFINED",
+                        associationTypeId: 512
                     }
                 ]
             }
         ],
-        "objectWriteTraceId": null,
-        "properties": {
+        objectWriteTraceId: null,
+        properties: {
             "hs_order_name": "Camping supplies",
             "hs_currency_code": "USD",
             "hs_source_store": "REI - Portland",
@@ -237,9 +238,9 @@ function testGetObjectsOrders() returns error? {
 @test:Config {}
 function testPostOrdersBatchArchive() returns error? {
     BatchInputSimplePublicObjectId payload = {
-        "inputs": [
+        inputs: [
             {
-                "id": "10"
+                id: "10"
             }
         ]
     };

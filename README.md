@@ -10,7 +10,7 @@
 
 [HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/hubspot.crm.commerce.orders` package offers APIs to connect and interact with [HubSpot API for CRM Commerce Orders](https://developers.hubspot.com/docs/reference/api/crm/commerce/orders) endpoints, specifically based on [HubSpot CRM Commerce Orders API v3 OpenAPI spec](https://github.com/HubSpot/HubSpot-public-api-spec-collection/blob/main/PublicApiSpecs/CRM/Orders/Rollouts/424/v3/orders.json).
+The `ballerinax/hubspot.crm.commerce.orders` package offers APIs to connect and interact with [HubSpot API for CRM Commerce Orders](https://developers.hubspot.com/docs/reference/api/crm/commerce/orders) endpoints, specifically based on [HubSpot CRM Commerce Orders REST API](https://developers.hubspot.com/docs/reference/api).
 
 ## Setup guide
 
@@ -26,7 +26,7 @@ If you don't have a HubSpot Developer Account you can sign up to a free account 
 
 Within app developer accounts, you can create [developer test account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) under your account to test apps and integrations without affecting any real HubSpot data.
 
-> **Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
+>**Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
 
 1. Go to Test Account section from the left sidebar.
 
@@ -82,8 +82,6 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 
-> **NOTE:** If you are using a `localhost` redirect url, make sure to have a listener running at the relevant port before executing the next step. 2. Paste it in the browser and select your developer test account to install the app when prompted.
-
 ![Hubspot Get Auth Code](./docs/setup/resources/install_app.png)
 
 3. A code will be displayed in the browser. Copy the code.
@@ -130,8 +128,8 @@ To use the `HubSpot Commerce Orders` connector in your Ballerina application, up
 Import the `hubspot.crm.commerce.orders` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/hubspot.crm.commerce.orders as orders;
 import ballerina/oauth2;
+import ballerinax/hubspot.crm.commerce.orders as orders;
 ```
 
 ### Step 2: Instantiate a new connector
@@ -150,6 +148,7 @@ import ballerina/oauth2;
    configurable string clientId = ?;
    configurable string clientSecret = ?;
    configurable string refreshToken = ?;
+   
    final orders:ConnectionConfig config = {
        auth : {
            clientId,
@@ -158,7 +157,7 @@ import ballerina/oauth2;
            credentialBearer: oauth2:POST_BODY_BEARER
        }
    };
-   final orders:Client baseClient = check new (config, "https://api.hubapi.com/crm/v3/objects");
+   final orders:Client baseClient = check new (config);
    ```
 
 ### Step 3: Invoke the connector operation

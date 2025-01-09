@@ -182,8 +182,8 @@ The `HubSpot CRM Commerce Orders` connector provides practical examples illustra
 
 1. Download and install Java SE Development Kit (JDK) version 21. You can download it from either of the following sources:
 
-   - [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
-   - [OpenJDK](https://adoptium.net/)
+    * [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
+    * [OpenJDK](https://adoptium.net/)
 
    > **Note:** After installation, remember to set the `JAVA_HOME` environment variable to the directory where JDK was installed.
 

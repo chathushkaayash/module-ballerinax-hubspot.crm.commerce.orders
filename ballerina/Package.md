@@ -122,8 +122,8 @@ To use the `HubSpot Commerce Orders` connector in your Ballerina application, up
 Import the `hubspot.crm.commerce.orders` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/hubspot.crm.commerce.orders as orders;
 import ballerina/oauth2;
+import ballerinax/hubspot.crm.commerce.orders as orders;
 ```
 
 ### Step 2: Instantiate a new connector
@@ -142,6 +142,7 @@ import ballerina/oauth2;
    configurable string clientId = ?;
    configurable string clientSecret = ?;
    configurable string refreshToken = ?;
+   
    final orders:ConnectionConfig config = {
        auth : {
            clientId,
@@ -150,7 +151,7 @@ import ballerina/oauth2;
            credentialBearer: oauth2:POST_BODY_BEARER
        }
    };
-   final orders:Client baseClient = check new (config, "https://api.hubapi.com/crm/v3/objects");
+   final orders:Client baseClient = check new (config);
    ```
 
 ### Step 3: Invoke the connector operation

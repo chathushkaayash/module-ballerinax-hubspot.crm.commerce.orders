@@ -317,4 +317,3 @@ dependencies = [
 modules = [
 	{org = "wso2", packageName = "order_management", moduleName = "order_management"}
 ]
-

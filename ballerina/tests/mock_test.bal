@@ -86,4 +86,3 @@ isolated function mockTestForCreatingBatchOfOrdersByUniqueProperty() returns err
     test:assertEquals(response.results[0], expectedResult);
     test:assertEquals(response.status, "COMPLETE");
 }
-

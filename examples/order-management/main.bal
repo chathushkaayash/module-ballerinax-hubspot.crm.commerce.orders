@@ -124,4 +124,3 @@ function deleteOrder(orders:Client hubspotClient, string orderId) returns error?
         io:println("Failed to delete order with ID: ", orderId);
     }
 }
-

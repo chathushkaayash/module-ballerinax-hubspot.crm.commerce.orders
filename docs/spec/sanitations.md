@@ -15,9 +15,9 @@ These changes are done in order to improve the overall usability, and as workaro
   `https://api.hubspot.com`
 
 - **Updated**:
-  `https://api.hubapi.com/crm/v3/objects`
+  `https://api.hubapi.com/crm/v3/objects/orders`
 
-- **Reason**: This change of adding the common prefix `/crm/v3/objects` to the base url makes it easier to access endpoints using the client.
+- **Reason**: This change of adding the common prefix `/crm/v3/objects/orders` to the base url makes it easier to access endpoints using the client.
 
 2. Update the API Paths
 
@@ -26,7 +26,7 @@ These changes are done in order to improve the overall usability, and as workaro
 - **Updated**: Common prefix is now removed from the endpoints as it is included in the base URL.
 
   - **Original**: `/crm/v3/objects/orders/search`
-  - **Updated**: `/orders/search`
+  - **Updated**: `/search`
 
 - **Reason**: This change simplifies the API paths, making them shorter and more readable.
 

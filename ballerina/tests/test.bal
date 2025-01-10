@@ -55,7 +55,7 @@ function testPostOrdersSearch() returns error? {
         ]
     };
     CollectionResponseWithTotalSimplePublicObjectForwardPaging response = 
-        check baseClient->/orders/search.post(payload = payload);
+        check baseClient->/search.post(payload = payload);
     test:assertTrue(response.total >= 0);
 }
 
@@ -74,7 +74,7 @@ function testPostOrdersBatchRead() returns error? {
         properties: ["hs_lastmodifieddate", "hs_createdate", "hs_object_id", "updatedAt"]
     };
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = 
-        check baseClient->/orders/batch/read.post(payload = payload);
+        check baseClient->/batch/read.post(payload = payload);
     if response.status != "PENDING" && response.status != "PROCESSING" 
         && response.status != "CANCELED" && response.status != "COMPLETE" {
         test:assertFail("invalid status type");
@@ -87,7 +87,7 @@ function testPostOrdersBatchRead() returns error? {
 function testDeleteObjectsOrdersByOrderId() returns error? {
     string orderId = "10";
 
-    http:Response response = check baseClient->/orders/[orderId].delete();
+    http:Response response = check baseClient->/[orderId].delete();
     test:assertTrue(response.statusCode == 204);
 }
 
@@ -102,7 +102,7 @@ function testPatchObjectsOrdersByOrderId() returns error? {
             "hs_shipping_tracking_number": "123098521091"
         }
     };
-    SimplePublicObject response = check baseClient->/orders/[orderId].patch(payload = payload);
+    SimplePublicObject response = check baseClient->/[orderId].patch(payload = payload);
     test:assertFalse(response?.id is "", "id should not be empty");
     test:assertFalse(response?.createdAt is "", "creation time should not be empty");
     test:assertFalse(response?.updatedAt is "", "updated time should not be empty");
@@ -112,7 +112,7 @@ function testPatchObjectsOrdersByOrderId() returns error? {
 function testGetObjectsOrdersByOrderId() returns error? {
     string orderId = "395972319872";
 
-    SimplePublicObjectWithAssociations response = check baseClient->/orders/[orderId];
+    SimplePublicObjectWithAssociations response = check baseClient->/[orderId];
     test:assertFalse(response?.createdAt is "", "creation time should not be empty");
     test:assertFalse(response?.updatedAt is "", "updated time should not be empty");
 
@@ -135,7 +135,7 @@ function testPostordersBatchUpsert() returns error? {
         ]
     };
     BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = 
-        check baseClient->/orders/batch/upsert.post(payload = payload);
+        check baseClient->/batch/upsert.post(payload = payload);
     test:assertTrue(response.status == "COMPLETE");
     test:assertFalse(response?.completedAt is "", "creation time should not be empty");
     test:assertFalse(response?.startedAt is "", "start time should not be empty");
@@ -166,7 +166,7 @@ function testPostOrdersBatchCreate() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicObject response = check baseClient->/orders/batch/create.post(payload = payload);
+    BatchResponseSimplePublicObject response = check baseClient->/batch/create.post(payload = payload);
     test:assertFalse(response.completedAt is "", "completedAt should not be empty");
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
@@ -185,7 +185,7 @@ function testPostObjectsOrdersBatchUpdate() returns error? {
         ]
     };
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = 
-        check baseClient->/orders/batch/update.post(payload = payload);
+        check baseClient->/batch/update.post(payload = payload);
     test:assertFalse(response.completedAt is "", "completedAt should not be empty");
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
@@ -219,7 +219,7 @@ function testPostObjectsOrders() returns error? {
             "hs_shipping_address_street": "123 Fake Street"
         }
     };
-    SimplePublicObject response = check baseClient->/orders.post(payload = payload);
+    SimplePublicObject response = check baseClient->/.post(payload = payload);
 
     test:assertFalse(response.createdAt is "", "createdAt should not be empty");
     test:assertFalse(response.updatedAt is "", "updateAt should not be empty");
@@ -228,7 +228,7 @@ function testPostObjectsOrders() returns error? {
 
 @test:Config {}
 function testGetObjectsOrders() returns error? {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/orders;
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/;
 
     foreach SimplePublicObjectWithAssociations result in response.results {
         test:assertFalse(result.createdAt is "", "createdAt should not be empty");
@@ -245,6 +245,6 @@ function testPostOrdersBatchArchive() returns error? {
             }
         ]
     };
-    http:Response response = check baseClient->/orders/batch/archive.post(payload = payload);
+    http:Response response = check baseClient->/batch/archive.post(payload = payload);
     test:assertTrue(response.statusCode == 204);
 }

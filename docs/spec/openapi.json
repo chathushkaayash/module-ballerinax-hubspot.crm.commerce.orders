@@ -22,7 +22,7 @@
   },
   "servers": [
     {
-      "url": "https://api.hubapi.com"
+      "url": "https://api.hubapi.com/crm/v3/objects/orders"
     }
   ],
   "tags": [
@@ -37,7 +37,7 @@
     }
   ],
   "paths": {
-    "/orders/batch/read": {
+    "/batch/read": {
       "post": {
         "tags": ["Batch"],
         "summary": "Read a batch of orders by internal ID, or unique property values",
@@ -101,7 +101,7 @@
         ]
       }
     },
-    "/orders/{orderId}": {
+    "/{orderId}": {
       "get": {
         "tags": ["Basic"],
         "summary": "Read",
@@ -306,7 +306,7 @@
         ]
       }
     },
-    "/orders/batch/archive": {
+    "/batch/archive": {
       "post": {
         "tags": ["Batch"],
         "summary": "Archive a batch of orders by ID",
@@ -341,7 +341,7 @@
         ]
       }
     },
-    "/orders/batch/create": {
+    "/batch/create": {
       "post": {
         "tags": ["Batch"],
         "summary": "Create a batch of orders",
@@ -392,7 +392,7 @@
         ]
       }
     },
-    "/orders/batch/update": {
+    "/batch/update": {
       "post": {
         "tags": ["Batch"],
         "summary": "Update a batch of orders",
@@ -443,7 +443,7 @@
         ]
       }
     },
-    "/orders": {
+    "/": {
       "get": {
         "tags": ["Basic"],
         "summary": "List",
@@ -594,7 +594,7 @@
         ]
       }
     },
-    "/orders/batch/upsert": {
+    "/batch/upsert": {
       "post": {
         "tags": ["Batch"],
         "summary": "Create or update a batch of orders by unique property values",
@@ -645,7 +645,7 @@
         ]
       }
     },
-    "/orders/search": {
+    "/search": {
       "post": {
         "tags": ["Search"],
         "operationId": "post-/crm/v3/objects/orders/search",

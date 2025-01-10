@@ -22,13 +22,12 @@ import ballerina/http;
 public isolated client class Client {
     final http:Client clientEp;
     final readonly & ApiKeysConfig? apiKeyConfig;
-
     # Gets invoked to initialize the `connector`.
     #
     # + config - The configurations to be used when initializing the `connector` 
     # + serviceUrl - URL of the target service 
     # + return - An error if connector initialization failed 
-    public isolated function init(ConnectionConfig config, string serviceUrl = "https://api.hubapi.com/crm/v3/objects") returns error? {
+    public isolated function init(ConnectionConfig config, string serviceUrl = "https://api.hubapi.com/crm/v3/objects/orders") returns error? {
         http:ClientConfiguration httpClientConfig = {httpVersion: config.httpVersion, timeout: config.timeout, forwarded: config.forwarded, poolConfig: config.poolConfig, compression: config.compression, circuitBreaker: config.circuitBreaker, retryConfig: config.retryConfig, validation: config.validation};
         do {
             if config.http1Settings is ClientHttp1Settings {
@@ -66,8 +65,8 @@ public isolated client class Client {
     #
     # + headers - Headers to be sent with the request 
     # + return - No content 
-    resource isolated function delete orders/[string orderId](map<string|string[]> headers = {}) returns http:Response|error {
-        string resourcePath = string `/orders/${getEncodedUri(orderId)}`;
+    resource isolated function delete [string orderId](map<string|string[]> headers = {}) returns http:Response|error {
+        string resourcePath = string `/${getEncodedUri(orderId)}`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -81,8 +80,8 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function get orders(map<string|string[]> headers = {}, *GetCrmV3ObjectsOrdersQueries queries) returns CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error {
-        string resourcePath = string `/orders`;
+    resource isolated function get .(map<string|string[]> headers = {}, *GetCrmV3ObjectsOrdersQueries queries) returns CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error {
+        string resourcePath = string `/`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -98,8 +97,8 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function get orders/[string orderId](map<string|string[]> headers = {}, *GetCrmV3ObjectsOrdersOrderidQueries queries) returns SimplePublicObjectWithAssociations|error {
-        string resourcePath = string `/orders/${getEncodedUri(orderId)}`;
+    resource isolated function get [string orderId](map<string|string[]> headers = {}, *GetCrmV3ObjectsOrdersOrderidQueries queries) returns SimplePublicObjectWithAssociations|error {
+        string resourcePath = string `/${getEncodedUri(orderId)}`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -115,8 +114,8 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function patch orders/[string orderId](SimplePublicObjectInput payload, map<string|string[]> headers = {}, *PatchCrmV3ObjectsOrdersOrderidQueries queries) returns SimplePublicObject|error {
-        string resourcePath = string `/orders/${getEncodedUri(orderId)}`;
+    resource isolated function patch [string orderId](SimplePublicObjectInput payload, map<string|string[]> headers = {}, *PatchCrmV3ObjectsOrdersOrderidQueries queries) returns SimplePublicObject|error {
+        string resourcePath = string `/${getEncodedUri(orderId)}`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -133,8 +132,8 @@ public isolated client class Client {
     #
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
-    resource isolated function post orders(SimplePublicObjectInputForCreate payload, map<string|string[]> headers = {}) returns SimplePublicObject|error {
-        string resourcePath = string `/orders`;
+    resource isolated function post .(SimplePublicObjectInputForCreate payload, map<string|string[]> headers = {}) returns SimplePublicObject|error {
+        string resourcePath = string `/`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -150,8 +149,8 @@ public isolated client class Client {
     #
     # + headers - Headers to be sent with the request 
     # + return - No content 
-    resource isolated function post orders/batch/archive(BatchInputSimplePublicObjectId payload, map<string|string[]> headers = {}) returns http:Response|error {
-        string resourcePath = string `/orders/batch/archive`;
+    resource isolated function post batch/archive(BatchInputSimplePublicObjectId payload, map<string|string[]> headers = {}) returns http:Response|error {
+        string resourcePath = string `/batch/archive`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -167,8 +166,8 @@ public isolated client class Client {
     #
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
-    resource isolated function post orders/batch/create(BatchInputSimplePublicObjectInputForCreate payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
-        string resourcePath = string `/orders/batch/create`;
+    resource isolated function post batch/create(BatchInputSimplePublicObjectInputForCreate payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
+        string resourcePath = string `/batch/create`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -185,8 +184,8 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function post orders/batch/read(BatchReadInputSimplePublicObjectId payload, map<string|string[]> headers = {}, *PostCrmV3ObjectsOrdersBatchReadQueries queries) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
-        string resourcePath = string `/orders/batch/read`;
+    resource isolated function post batch/read(BatchReadInputSimplePublicObjectId payload, map<string|string[]> headers = {}, *PostCrmV3ObjectsOrdersBatchReadQueries queries) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
+        string resourcePath = string `/batch/read`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -203,8 +202,8 @@ public isolated client class Client {
     #
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
-    resource isolated function post orders/batch/update(BatchInputSimplePublicObjectBatchInput payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
-        string resourcePath = string `/orders/batch/update`;
+    resource isolated function post batch/update(BatchInputSimplePublicObjectBatchInput payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
+        string resourcePath = string `/batch/update`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -220,8 +219,8 @@ public isolated client class Client {
     #
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
-    resource isolated function post orders/batch/upsert(BatchInputSimplePublicObjectBatchInputUpsert payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors|error {
-        string resourcePath = string `/orders/batch/upsert`;
+    resource isolated function post batch/upsert(BatchInputSimplePublicObjectBatchInputUpsert payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors|error {
+        string resourcePath = string `/batch/upsert`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -235,8 +234,8 @@ public isolated client class Client {
 
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
-    resource isolated function post orders/search(PublicObjectSearchRequest payload, map<string|string[]> headers = {}) returns CollectionResponseWithTotalSimplePublicObjectForwardPaging|error {
-        string resourcePath = string `/orders/search`;
+    resource isolated function post search(PublicObjectSearchRequest payload, map<string|string[]> headers = {}) returns CollectionResponseWithTotalSimplePublicObjectForwardPaging|error {
+        string resourcePath = string `/search`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;

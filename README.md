@@ -56,7 +56,18 @@ Within app developer accounts, you can create [developer test account](https://d
 
 2. In the Scopes section, add the following scope for your app using the "Add new scope" button.
 
-   - `content`
+   - `crm.objects.orders.read`
+   - `crm.objects.orders.write`
+   - `crm.objects.deals.read`
+   - `crm.objects.deals.write`
+   - `crm.objects.carts.read`
+   - `crm.objects.commercepayments.read`
+   - `crm.objects.companies.read`
+   - `crm.objects.contacts.read`
+   - `crm.objects.invoices.read`
+   - `crm.objects.line_items.read`
+   - `crm.objects.quotes.read`
+   - `crm.objects.subscriptions.read`
 
    ![Hubspot Developer App Add Scopes](./docs/setup/resources/scopes.png)
 

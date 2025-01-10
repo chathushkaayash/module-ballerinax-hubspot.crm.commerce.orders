@@ -75,7 +75,8 @@ function testPostOrdersBatchRead() returns error? {
     };
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = 
         check baseClient->/orders/batch/read.post(payload = payload);
-    if response.status != "PENDING" && response.status != "PROCESSING" && response.status != "CANCELED" && response.status != "COMPLETE" {
+    if response.status != "PENDING" && response.status != "PROCESSING" 
+        && response.status != "CANCELED" && response.status != "COMPLETE" {
         test:assertFail("invalid status type");
     }
     test:assertFalse(response.completedAt is "", "completedAt should not be empty");

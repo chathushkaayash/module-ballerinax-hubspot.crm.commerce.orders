@@ -93,7 +93,7 @@ function testDeleteObjectsOrdersByOrderId() returns error? {
 
 @test:Config {}
 function testPatchObjectsOrdersByOrderId() returns error? {
-    string orderId = "394961395351";
+    string orderId = "395972319872";
     SimplePublicObjectInput payload =
     {
         objectWriteTraceId: "10",
@@ -110,7 +110,7 @@ function testPatchObjectsOrdersByOrderId() returns error? {
 
 @test:Config {}
 function testGetObjectsOrdersByOrderId() returns error? {
-    string orderId = "394961395351";
+    string orderId = "395972319872";
 
     SimplePublicObjectWithAssociations response = check baseClient->/orders/[orderId];
     test:assertFalse(response?.createdAt is "", "creation time should not be empty");

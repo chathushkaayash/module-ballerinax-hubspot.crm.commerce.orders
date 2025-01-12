@@ -300,7 +300,7 @@ modules = [
 ]
 
 [[package]]
-org = "roshane"
+org = "wso2"
 name = "batch_operations"
 version = "0.1.0"
 dependencies = [
@@ -310,5 +310,5 @@ dependencies = [
 	{org = "ballerinax", name = "hubspot.crm.commerce.orders"}
 ]
 modules = [
-	{org = "roshane", packageName = "batch_operations", moduleName = "batch_operations"}
+	{org = "wso2", packageName = "batch_operations", moduleName = "batch_operations"}
 ]

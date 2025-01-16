@@ -2,13 +2,32 @@
 
 The `ballerinax/hubspot.crm.commerce.orders` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
-
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+- **Ballerina:** Download and install Ballerina from [here](https://ballerina.io/downloads/).
+- **HubSpot developer account:** Create a HubSpot developer account and create an app to obtain the necessary credentials. Refer to the [Setup Guide](../ballerina/Package.md) for instructions.
+- **`hubspot.crm.commerce.orders` module:** Import the `ballerinax/hubspot.crm.commerce.orders` module into your Ballerina project and configure it with the obtained credentials. Refer to the [Config.toml.template](./order-creation/Config.toml.template) file for creating the `Config.toml` file.
+
+```
+import ballerinax/hubspot.crm.commerce.orders as orders;
+
+configurable string clientId = ?;
+configurable string clientSecret = ?;
+configurable string refreshToken = ?;
+
+public function main() returns error?{
+    orders:ConnectionConfig config = {
+        auth: {
+            clientId: clientId,
+            clientSecret: clientSecret,
+            refreshToken: refreshToken,
+            credentialBearer: oauth2:POST_BODY_BEARER
+        }
+    };
+
+    final orders:Client baseClient = check new orders:Client(config, serviceUrl);
+}
+```
 
 ## Running an example
 

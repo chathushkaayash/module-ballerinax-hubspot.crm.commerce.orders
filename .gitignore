@@ -56,3 +56,7 @@ build
 
 # Ignore Docker env file
 docker.env
+
+# Ignore examples files
+**/target/
+**/generated/

@@ -54,7 +54,7 @@ function handleSearchOperations(orders:Client hubspotClient) returns error? {
 // Function to search for orders based on specific criteria
 function searchOrders(orders:Client hubspotClient) returns error? {
     orders:PublicObjectSearchRequest searchRequest = {
-        query: "example",
+        query: "apple",
         properties: ["hs_order_name", "hs_currency_code"],
         filterGroups: [
             {

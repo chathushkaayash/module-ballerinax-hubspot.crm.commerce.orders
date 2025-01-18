@@ -26,7 +26,7 @@ configurable string refreshToken = ?;
 final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
 final string serviceUrl = isLiveServer ? "https://api.hubapi.com/crm/v3/objects/orders" : "http://localhost:9090/crm/v3/objects/orders";
 
-final Client baseClient = check initClient();
+final Client orderClient = check initClient();
 
 isolated function initClient() returns Client|error {
     if isLiveServer {
@@ -71,7 +71,7 @@ function testPostOrdersSearch() returns error? {
         ]
     };
     CollectionResponseWithTotalSimplePublicObjectForwardPaging response = 
-        check baseClient->/search.post(payload = payload);
+        check orderClient->/search.post(payload = payload);
     test:assertTrue(response.total >= 0);
 }
 
@@ -93,7 +93,7 @@ function testPostOrdersBatchRead() returns error? {
         properties: ["hs_lastmodifieddate", "hs_createdate", "hs_object_id", "updatedAt"]
     };
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = 
-        check baseClient->/batch/read.post(payload = payload);
+        check orderClient->/batch/read.post(payload = payload);
     if response.status != "PENDING" && response.status != "PROCESSING" 
         && response.status != "CANCELED" && response.status != "COMPLETE" {
         test:assertFail("invalid status type");
@@ -109,7 +109,7 @@ function testPostOrdersBatchRead() returns error? {
 function testDeleteObjectsOrdersByOrderId() returns error? {
     string orderId = "10";
 
-    http:Response response = check baseClient->/[orderId].delete();
+    http:Response response = check orderClient->/[orderId].delete();
     test:assertTrue(response.statusCode == 204);
 }
 
@@ -127,7 +127,7 @@ function testPatchObjectsOrdersByOrderId() returns error? {
             "hs_shipping_tracking_number": "123098521091"
         }
     };
-    SimplePublicObject response = check baseClient->/[orderId].patch(payload = payload);
+    SimplePublicObject response = check orderClient->/[orderId].patch(payload = payload);
     test:assertFalse(response?.id is "", "id should not be empty");
     test:assertFalse(response?.createdAt is "", "creation time should not be empty");
     test:assertFalse(response?.updatedAt is "", "updated time should not be empty");
@@ -140,7 +140,7 @@ function testPatchObjectsOrdersByOrderId() returns error? {
 function testGetObjectsOrdersByOrderId() returns error? {
     string orderId = "395972319872";
 
-    SimplePublicObjectWithAssociations response = check baseClient->/[orderId];
+    SimplePublicObjectWithAssociations response = check orderClient->/[orderId];
     test:assertFalse(response?.createdAt is "", "creation time should not be empty");
     test:assertFalse(response?.updatedAt is "", "updated time should not be empty");
 
@@ -166,7 +166,7 @@ function testPostordersBatchUpsert() returns error? {
         ]
     };
     BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = 
-        check baseClient->/batch/upsert.post(payload = payload);
+        check orderClient->/batch/upsert.post(payload = payload);
     test:assertTrue(response.status == "COMPLETE");
     test:assertFalse(response?.completedAt is "", "creation time should not be empty");
     test:assertFalse(response?.startedAt is "", "start time should not be empty");
@@ -200,7 +200,7 @@ function testPostOrdersBatchCreate() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicObject response = check baseClient->/batch/create.post(payload = payload);
+    BatchResponseSimplePublicObject response = check orderClient->/batch/create.post(payload = payload);
     test:assertFalse(response.completedAt is "", "completedAt should not be empty");
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
@@ -222,7 +222,7 @@ function testPostObjectsOrdersBatchUpdate() returns error? {
         ]
     };
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = 
-        check baseClient->/batch/update.post(payload = payload);
+        check orderClient->/batch/update.post(payload = payload);
     test:assertFalse(response.completedAt is "", "completedAt should not be empty");
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
@@ -259,7 +259,7 @@ function testPostObjectsOrders() returns error? {
             "hs_shipping_address_street": "123 Fake Street"
         }
     };
-    SimplePublicObject response = check baseClient->/.post(payload = payload);
+    SimplePublicObject response = check orderClient->/.post(payload = payload);
 
     test:assertFalse(response.createdAt is "", "createdAt should not be empty");
     test:assertFalse(response.updatedAt is "", "updateAt should not be empty");
@@ -271,7 +271,7 @@ function testPostObjectsOrders() returns error? {
     groups: ["live_service_test"]
 }
 function testGetObjectsOrders() returns error? {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/;
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check orderClient->/;
 
     foreach SimplePublicObjectWithAssociations result in response.results {
         test:assertFalse(result.createdAt is "", "createdAt should not be empty");
@@ -291,6 +291,6 @@ function testPostOrdersBatchArchive() returns error? {
             }
         ]
     };
-    http:Response response = check baseClient->/batch/archive.post(payload = payload);
+    http:Response response = check orderClient->/batch/archive.post(payload = payload);
     test:assertTrue(response.statusCode == 204);
 }

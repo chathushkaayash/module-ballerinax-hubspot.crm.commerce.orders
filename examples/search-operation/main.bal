@@ -16,7 +16,7 @@
 
 import ballerina/io;
 import ballerina/oauth2;
-import ballerinax/hubspot.crm.commerce.orders as orders;
+import ballerinax/hubspot.crm.commerce.orders as hsorders;
 
 // Configuration for HubSpot API client credentials
 configurable string clientId = ?;
@@ -25,7 +25,7 @@ configurable string refreshToken = ?;
 
 public function main() returns error? {
     // Initialize the HubSpot client with the given configuration
-    orders:ConnectionConfig config = {
+    hsorders:ConnectionConfig config = {
         auth: {
             clientId,
             clientSecret,
@@ -33,27 +33,26 @@ public function main() returns error? {
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };
-    final orders:Client hubspotClient = check new orders:Client(
-        config, serviceUrl = "https://api.hubapi.com/crm/v3/objects");
+    final hsorders:Client hubspotClient = check new hsorders:Client(config);
     io:println("HubSpot Client initialized successfully.");
 
     // Handle search operations
-    check handleSearchOperations(hubspotClient);
+    handleSearchOperations(hubspotClient);
 }
 
 // Function to handle all search operations
-function handleSearchOperations(orders:Client hubspotClient) returns error? {
+function handleSearchOperations(hsorders:Client hubspotClient) {
     io:println("Starting Search Operations...");
 
     // Perform order search
-    check searchOrders(hubspotClient);
+    searchOrders(hubspotClient);
 
     io:println("Search Operations Completed.");
 }
 
 // Function to search for orders based on specific criteria
-function searchOrders(orders:Client hubspotClient) returns error? {
-    orders:PublicObjectSearchRequest searchRequest = {
+function searchOrders(hsorders:Client hubspotClient) {
+    hsorders:PublicObjectSearchRequest searchRequest = {
         query: "apple",
         properties: ["hs_order_name", "hs_currency_code"],
         filterGroups: [
@@ -69,12 +68,11 @@ function searchOrders(orders:Client hubspotClient) returns error? {
         ]
     };
 
-    orders:CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response = 
+    hsorders:CollectionResponseWithTotalSimplePublicObjectForwardPaging|error response = 
         hubspotClient->/orders/search.post(searchRequest);
-    if response is orders:CollectionResponseWithTotalSimplePublicObjectForwardPaging {
+    if response is hsorders:CollectionResponseWithTotalSimplePublicObjectForwardPaging {
         io:println("Search results: ", response.results.length(), " orders found.");
     } else {
         io:println("No orders found matching search criteria.");
-        return error("Search operation failed.");
     }
 }

@@ -16,9 +16,8 @@
 
 import ballerina/http;
 import ballerina/io;
-import ballerina/log;
 import ballerina/oauth2;
-import ballerinax/hubspot.crm.commerce.orders as hsOrders;
+import ballerinax/hubspot.crm.commerce.orders as hsorders;
 
 // Configuration for HubSpot API client credentials
 configurable string clientId = ?;
@@ -27,7 +26,7 @@ configurable string refreshToken = ?;
 
 public function main() returns error? {
     // Initialize the HubSpot client with the given configuration
-    hsOrders:ConnectionConfig config = {
+    hsorders:ConnectionConfig config = {
         auth: {
             clientId,
             clientSecret,
@@ -35,12 +34,12 @@ public function main() returns error? {
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };
-    final hsOrders:Client hubspotClient = check new hsOrders:Client(config);
-    log:printInfo("HubSpot Client initialized successfully.");
+    final hsorders:Client hubspotClient = check new hsorders:Client(config);
+    io:println("HubSpot Client initialized successfully.");
     handleOrderManagement(hubspotClient);
 }
 
-function handleOrderManagement(hsOrders:Client hubspotClient) {
+function handleOrderManagement(hsorders:Client hubspotClient) {
     io:println("Starting Order Management...");
     string|error newOrderId = "";
     newOrderId = createOrder(hubspotClient);
@@ -56,8 +55,8 @@ function handleOrderManagement(hsOrders:Client hubspotClient) {
 }
 
 // Create a new order
-function createOrder(hsOrders:Client hubspotClient) returns string|error {
-    hsOrders:SimplePublicObjectInputForCreate newOrder =
+function createOrder(hsorders:Client hubspotClient) returns string|error {
+    hsorders:SimplePublicObjectInputForCreate newOrder =
     {
         associations: [
             {
@@ -82,8 +81,8 @@ function createOrder(hsOrders:Client hubspotClient) returns string|error {
             "hs_shipping_address_street": "123 Fake Street"
         }
     };
-    hsOrders:SimplePublicObject|error response = hubspotClient->/orders.post(newOrder);
-    if response is hsOrders:SimplePublicObject {
+    hsorders:SimplePublicObject|error response = hubspotClient->/orders.post(newOrder);
+    if response is hsorders:SimplePublicObject {
         io:println("Order created successfully with ID: ", response.id);
         return response.id;
     } else {
@@ -92,35 +91,35 @@ function createOrder(hsOrders:Client hubspotClient) returns string|error {
     }
 }
 
-function readOrder(hsOrders:Client hubspotClient, string orderId) {
+function readOrder(hsorders:Client hubspotClient, string orderId) {
     var response = hubspotClient->/orders/[orderId];
-    if response is hsOrders:SimplePublicObjectWithAssociations {
+    if response is hsorders:SimplePublicObjectWithAssociations {
         io:println("Order details retrieved: ", response);
     } else {
         io:println("Failed to retrieve order with ID: ", orderId);
     }
 }
 
-function updateOrder(hsOrders:Client hubspotClient, string orderId) {
-    hsOrders:SimplePublicObjectInput updateDetails = {
+function updateOrder(hsorders:Client hubspotClient, string orderId) {
+    hsorders:SimplePublicObjectInput updateDetails = {
         properties: {
             "hs_fulfillment_status": "Shipped"
         }
     };
-    var response = hubspotClient->/orders/[orderId].patch(updateDetails);
-    if response is hsOrders:SimplePublicObject {
-        log:printInfo("Order updated successfully with ID: "+ response.id);
+    hsorders:SimplePublicObject|error response = hubspotClient->/orders/[orderId].patch(updateDetails);
+    if response is hsorders:SimplePublicObject {
+        io:println("Order updated successfully with ID: "+ response.id);
     } else {
-        log:printError("Failed to update order with ID: "+ orderId);
+        io:println("Failed to update order with ID: "+ orderId);
     }
 }
 
-function deleteOrder(hsOrders:Client hubspotClient, string orderId){
+function deleteOrder(hsorders:Client hubspotClient, string orderId){
     http:Response|error response = hubspotClient->/orders/[orderId].delete();
     if response is http:Response {
         io:println("Order deleted successfully with status: ", response.statusCode);
     } else {
-        log:printError("Failed to delete order with ID: " + orderId);
+        io:println("Failed to delete order with ID: " + orderId);
     }
 }
 

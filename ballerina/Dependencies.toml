@@ -5,7 +5,7 @@
 
 [ballerina]
 dependencies-toml-version = "2"
-distribution-version = "2201.10.3"
+distribution-version = "2201.10.0"
 
 [[package]]
 org = "ballerina"
@@ -256,6 +256,9 @@ dependencies = [
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jballerina.java"}
 ]
+modules = [
+	{org = "ballerina", packageName = "os", moduleName = "os"}
+]
 
 [[package]]
 org = "ballerina"
@@ -318,6 +321,7 @@ version = "1.0.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
 	{org = "ballerina", name = "oauth2"},
+	{org = "ballerina", name = "os"},
 	{org = "ballerina", name = "test"},
 	{org = "ballerina", name = "url"},
 	{org = "ballerinai", name = "observe"}
@@ -325,3 +329,4 @@ dependencies = [
 modules = [
 	{org = "ballerinax", packageName = "hubspot.crm.commerce.orders", moduleName = "hubspot.crm.commerce.orders"}
 ]
+

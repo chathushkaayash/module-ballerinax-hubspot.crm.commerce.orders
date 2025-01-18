@@ -22,32 +22,25 @@ import ballerina/test;
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 configurable string refreshToken = ?;
+configurable boolean enableLiveServerTest = false;
 
 final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
-final string serviceUrl = isLiveServer ? "https://api.hubapi.com/crm/v3/objects/orders" : "http://localhost:9090/crm/v3/objects/orders";
 
-final Client orderClient = check initClient();
+OAuth2RefreshTokenGrantConfig auth = {
+    clientId,
+    clientSecret,
+    refreshToken,
+    credentialBearer: oauth2:POST_BODY_BEARER
+};
 
-isolated function initClient() returns Client|error {
-    if isLiveServer {
-        OAuth2RefreshTokenGrantConfig auth = {
-            clientId,
-            clientSecret,
-            refreshToken,
-            credentialBearer: oauth2:POST_BODY_BEARER
-        };
-        return check new ({auth}, serviceUrl);
-    }
-    return check new ({
-        auth: {
-            token: "test-token"
-        }
-    }, serviceUrl);
-}
+final Client orderClient = check new ({
+    auth: enableLiveServerTest ? auth
+        : {token: "test-token"}
+});
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPostOrdersSearch() returns error? {
     PublicObjectSearchRequest payload = {
@@ -76,8 +69,8 @@ function testPostOrdersSearch() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPostOrdersBatchRead() returns error? {
 
@@ -103,8 +96,8 @@ function testPostOrdersBatchRead() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testDeleteObjectsOrdersByOrderId() returns error? {
     string orderId = "10";
@@ -114,8 +107,8 @@ function testDeleteObjectsOrdersByOrderId() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPatchObjectsOrdersByOrderId() returns error? {
     string orderId = "395972319872";
@@ -134,8 +127,8 @@ function testPatchObjectsOrdersByOrderId() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testGetObjectsOrdersByOrderId() returns error? {
     string orderId = "395972319872";
@@ -147,8 +140,8 @@ function testGetObjectsOrdersByOrderId() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPostordersBatchUpsert() returns error? {
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
@@ -173,8 +166,8 @@ function testPostordersBatchUpsert() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPostOrdersBatchCreate() returns error? {
 
@@ -206,8 +199,8 @@ function testPostOrdersBatchCreate() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPostObjectsOrdersBatchUpdate() returns error? {
     BatchInputSimplePublicObjectBatchInput payload =
@@ -228,8 +221,8 @@ function testPostObjectsOrdersBatchUpdate() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPostObjectsOrders() returns error? {
 
@@ -267,8 +260,8 @@ function testPostObjectsOrders() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testGetObjectsOrders() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check orderClient->/;
@@ -280,8 +273,8 @@ function testGetObjectsOrders() returns error? {
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_service_test"]
+    groups: ["live_tests"],
+    enable: enableLiveServerTest
 }
 function testPostOrdersBatchArchive() returns error? {
     BatchInputSimplePublicObjectId payload = {

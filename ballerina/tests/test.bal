@@ -16,23 +16,39 @@
 
 import ballerina/http;
 import ballerina/oauth2;
+import ballerina/os;
 import ballerina/test;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 configurable string refreshToken = ?;
 
-OAuth2RefreshTokenGrantConfig auth = {
-    clientId,
-    clientSecret,
-    refreshToken,
-    credentialBearer: oauth2:POST_BODY_BEARER
-};
+final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
+final string serviceUrl = isLiveServer ? "https://api.hubapi.com/crm/v3/objects/orders" : "http://localhost:9090/crm/v3/objects/orders";
 
-ConnectionConfig config = {auth: auth};
-final Client baseClient = check new Client(config);
+final Client baseClient = check initClient();
 
-@test:Config {}
+isolated function initClient() returns Client|error {
+    if isLiveServer {
+        OAuth2RefreshTokenGrantConfig auth = {
+            clientId,
+            clientSecret,
+            refreshToken,
+            credentialBearer: oauth2:POST_BODY_BEARER
+        };
+        return check new ({auth}, serviceUrl);
+    }
+    return check new ({
+        auth: {
+            token: "test-token"
+        }
+    }, serviceUrl);
+}
+
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPostOrdersSearch() returns error? {
     PublicObjectSearchRequest payload = {
         query: "1",
@@ -59,7 +75,10 @@ function testPostOrdersSearch() returns error? {
     test:assertTrue(response.total >= 0);
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPostOrdersBatchRead() returns error? {
 
     BatchReadInputSimplePublicObjectId payload = {
@@ -83,7 +102,10 @@ function testPostOrdersBatchRead() returns error? {
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testDeleteObjectsOrdersByOrderId() returns error? {
     string orderId = "10";
 
@@ -91,7 +113,10 @@ function testDeleteObjectsOrdersByOrderId() returns error? {
     test:assertTrue(response.statusCode == 204);
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPatchObjectsOrdersByOrderId() returns error? {
     string orderId = "395972319872";
     SimplePublicObjectInput payload =
@@ -108,7 +133,10 @@ function testPatchObjectsOrdersByOrderId() returns error? {
     test:assertFalse(response?.updatedAt is "", "updated time should not be empty");
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testGetObjectsOrdersByOrderId() returns error? {
     string orderId = "395972319872";
 
@@ -118,7 +146,10 @@ function testGetObjectsOrdersByOrderId() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPostordersBatchUpsert() returns error? {
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
         inputs: [
@@ -141,7 +172,10 @@ function testPostordersBatchUpsert() returns error? {
     test:assertFalse(response?.startedAt is "", "start time should not be empty");
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPostOrdersBatchCreate() returns error? {
 
     BatchInputSimplePublicObjectInputForCreate payload = {
@@ -171,7 +205,10 @@ function testPostOrdersBatchCreate() returns error? {
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPostObjectsOrdersBatchUpdate() returns error? {
     BatchInputSimplePublicObjectBatchInput payload =
     {
@@ -190,7 +227,10 @@ function testPostObjectsOrdersBatchUpdate() returns error? {
     test:assertFalse(response.startedAt is "", "startedAt should not be empty");
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPostObjectsOrders() returns error? {
 
     SimplePublicObjectInputForCreate payload =
@@ -226,7 +266,10 @@ function testPostObjectsOrders() returns error? {
 
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testGetObjectsOrders() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/;
 
@@ -236,7 +279,10 @@ function testGetObjectsOrders() returns error? {
     }
 }
 
-@test:Config {}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+}
 function testPostOrdersBatchArchive() returns error? {
     BatchInputSimplePublicObjectId payload = {
         inputs: [

@@ -19,9 +19,9 @@ import ballerina/oauth2;
 import ballerina/os;
 import ballerina/test;
 
-configurable string clientId = ?;
-configurable string clientSecret = ?;
-configurable string refreshToken = ?;
+configurable string clientId = "clientId";
+configurable string clientSecret = "clientSecret";
+configurable string refreshToken = "refreshToken";
 configurable boolean enableLiveServerTest = false;
 
 final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";

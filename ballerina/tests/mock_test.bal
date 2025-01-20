@@ -16,11 +16,14 @@
 
 import ballerina/test;
 
-final Client orderClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects/orders");
+final Client ordersClient = check new(config = {auth:{
+    token: "test-token"
+}}, serviceUrl="http://localhost:9090/crm/v3/objects/orders"
+);
 
 @test:Config {}
-isolated function mockTestForCreatingABatchOfOrders() returns error? {
-    BatchResponseSimplePublicObject response = check orderClient->/batch/create.post(
+function mockTestForCreatingABatchOfOrders() returns error? {
+    BatchResponseSimplePublicObject response = check ordersClient->/batch/create.post(
         {
             inputs: [
                 {
@@ -50,7 +53,7 @@ isolated function mockTestForCreatingABatchOfOrders() returns error? {
 @test:Config {}
 isolated function mockTestForCreatingBatchOfOrdersByUniqueProperty() returns error? {
     BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = 
-        check orderClient->/batch/upsert.post(
+        check ordersClient->/batch/upsert.post(
         payload = {
             inputs: [
                 {

@@ -30,21 +30,21 @@ Within app developer accounts, you can create [developer test account](https://d
 
 1. Go to Test Account section from the left sidebar.
 
-   ![Hubspot Developer Portal](./docs/setup/resources/test_acc_1.png)
+   ![Hubspot Developer Portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/test_acc_1.png)
 
 2. Click Create developer test account.
 
-   ![Hubspot Developer Test Account](./docs/setup/resources/test_acc_2.png)
+   ![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/test_acc_2.png)
 
 3. In the dialogue box, give a name to your test account and click create.
 
-   ![Hubspot Developer Test Account](./docs/setup/resources/test_acc_3.png)
+   ![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/test_acc_3.png)
 
 ### Step 3: Create a HubSpot App under your account.
 
 1. In your developer account, navigate to the "Apps" section. Click on "Create App"
 
-   ![Hubspot Create App](./docs/setup/resources/create_app_1.png)
+   ![Hubspot Create App](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/create_app_1.png)
 
 2. Provide the necessary details, including the app name and description.
 
@@ -52,7 +52,7 @@ Within app developer accounts, you can create [developer test account](https://d
 
 1. Move to the Auth Tab. (Second tab next to App Info)
 
-   ![Hubspot Developer Config Auth](./docs/setup/resources/auth_section.png)
+   ![Hubspot Developer Config Auth](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/auth_section.png)
 
 2. In the Scopes section, add the following scope for your app using the "Add new scope" button.
 
@@ -69,17 +69,17 @@ Within app developer accounts, you can create [developer test account](https://d
    - `crm.objects.quotes.read`
    - `crm.objects.subscriptions.read`
 
-   ![Hubspot Developer App Add Scopes](./docs/setup/resources/scopes.png)
+   ![Hubspot Developer App Add Scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/scopes.png)
 
 3. Add your Redirect URI in the relevant section. You can also use `localhost` addresses for local development purposes. Click Create App.
 
-   ![Hubspot Create Developer App](./docs/setup/resources/create_app_final.png)
+   ![Hubspot Create Developer App](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/create_app_final.png)
 
 ### Step 5: Get your Client ID and Client Secret
 
 - Navigate to the Auth section of your app. Make sure to save the provided Client ID and Client Secret.
 
-  ![Hubspot Get Credentials](./docs/setup/resources/get_credentials.png)
+  ![Hubspot Get Credentials](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/get_credentials.png)
 
 ### Step 6: Setup Authentication Flow
 
@@ -93,7 +93,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 
-![Hubspot Get Auth Code](./docs/setup/resources/install_app.png)
+![Hubspot Get Auth Code](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/main/docs/setup/resources/install_app.png)
 
 3. A code will be displayed in the browser. Copy the code.
 
@@ -187,9 +187,9 @@ public function main() returns error? {
 
 The `HubSpot CRM Commerce Orders` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.commerce.orders/tree/main/examples/), covering the following use cases:
 
-1. [Batch Operations](https://github.com/roshanemoraes/module-ballerinax-hubspot.crm.commerce.orders/tree/main/examples/batch-operations) - Perform Batch operations on Orders in HubSpot
-2. [Order Management](https://github.com/roshanemoraes/module-ballerinax-hubspot.crm.commerce.orders/tree/main/examples/order-management) - Perford CRUD operations on Orders in HubSpot
-3. [Search Operation](https://github.com/roshanemoraes/module-ballerinax-hubspot.crm.commerce.orders/tree/main/examples/search-operation) - Perform Search operations on Orders in HubSpot
+1. [Batch Operations](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/tree/main/examples/batch-operations) - Perform Batch operations on Orders in HubSpot
+2. [Order Management](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/tree/main/examples/order-management) - Perford CRUD operations on Orders in HubSpot
+3. [Search Operation](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/tree/main/examples/search-operation) - Perform Search operations on Orders in HubSpot
 
 ## Build from the source
 

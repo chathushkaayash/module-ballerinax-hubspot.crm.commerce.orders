@@ -109,6 +109,12 @@ jobs:
         run: |
           ./gradlew build -x test
           ./gradlew test
+
+      - name: Configure Git Identity
+        run: |
+          git config user.name "chathushkaayash"
+          git config user.email "chathushkaayash@gmail.com"
+
       - name: Commit and Push Changes
         run: |
           git add ballerina/

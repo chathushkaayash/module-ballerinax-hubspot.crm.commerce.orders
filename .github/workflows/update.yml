@@ -138,14 +138,14 @@ jobs:
               --base main \
               --head update-openapi-connector-${{ github.run_number }}
             echo "Pull request created successfully."
+            echo ${{ inputs.disable_checks }}
           fi
 
       - name: Check PR Build
-        if: ${{ steps.commitChanges.outputs.hasChanged && inputs.disable_checks != 'true' }}
+        if: ${{ steps.commitChanges.outputs.hasChanged && inputs.disable_checks == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
-          echo ${{ inputs.disable_checks != 'true' }}
           echo "Waiting for checks to complete..."
           gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
           sleep 5

@@ -104,13 +104,13 @@ jobs:
         working-directory: ballerina
         run: rm -f openapi.json flattened_openapi.json aligned_ballerina_openapi.json
 
-      - name: Build the Package
-        env:
-          packageUser: ${{ github.actor }}
-          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
-        run: |
-          ./gradlew build -x test
-          ./gradlew test
+      # - name: Build the Package
+      #   env:
+      #     packageUser: ${{ github.actor }}
+      #     packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
+      #   run: |
+      #     ./gradlew build -x test
+      #     ./gradlew test
 
       - name: Configure Git Identity
         run: |
@@ -118,6 +118,8 @@ jobs:
           git config user.email "chathushkaayash@gmail.com"
 
       - name: Commit and Push Changes
+        env:
+          GH_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
           git add ballerina/
           if git diff --cached --quiet; then

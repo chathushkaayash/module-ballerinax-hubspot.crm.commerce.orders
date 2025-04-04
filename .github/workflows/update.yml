@@ -53,17 +53,24 @@ jobs:
         working-directory: ballerina
         run: curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
 
-      - name: Align OpenAPI Specification
-        working-directory: ballerina
-        run: bal openapi align -i openapi.json
-
       - name: Flatten OpenAPI Specification
         working-directory: ballerina
-        run: bal openapi flatten -i aligned_ballerina_openapi.json
+        run: bal openapi flatten -i openapi.json
+
+      - name: Align OpenAPI Specification
+        working-directory: ballerina
+        run: bal openapi align -i flattened_openapi.json
 
       - name: Generate Ballerina Code
         working-directory: ballerina
-        run: bal openapi -i flattened_openapi.json
+        run: bal openapi -i aligned_ballerina_openapi.json --mode client
+
+      - name: Post cleanup
+        working-directory: ballerina
+        run: |
+          rm -f openapi.json
+          rm -f flattened_openapi.json
+          rm -f aligned_ballerina_openapi.json
 
       - name: Build the Package
         env:

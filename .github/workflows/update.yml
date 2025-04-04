@@ -58,7 +58,7 @@ jobs:
         run: |
           echo -e '${{ toJson(secrets) }}' | jq -r 'to_entries[] | .key + "=" + .value' >> $GITHUB_ENV
 
-      - name: Remove Specific Files if They Exist
+      - name: Remove Existing Client Files
         working-directory: ballerina
         run: |
           rm -f client.bal utils.bal types.bal
@@ -102,7 +102,7 @@ jobs:
           echo "Generating Ballerina code from OpenAPI Specification..."
           bal openapi -i aligned_ballerina_openapi.json --mode client
 
-      - name: Post cleanup
+      - name: Clean Up Intermediate Files
         working-directory: ballerina
         run: rm -f openapi.json flattened_openapi.json aligned_ballerina_openapi.json
 
@@ -140,7 +140,7 @@ jobs:
             echo "Pull request created successfully."
           fi
 
-      - name: Check PR Build (if not disabled)
+      - name: Check PR Build
         if: ${{ steps.commitChanges.outputs.hasChanged && inputs.disable_checks != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}

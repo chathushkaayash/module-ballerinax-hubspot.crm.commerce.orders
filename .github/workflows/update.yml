@@ -146,6 +146,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
           echo "Waiting for checks to complete..."
+          echo ${{ steps.commitChanges.outputs.hasChanged }}
+          echo ${{ inputs.disable_checks }}
           gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
           sleep 5
 

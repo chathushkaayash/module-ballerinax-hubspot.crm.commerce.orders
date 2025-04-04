@@ -1,7 +1,9 @@
 name: Update openapi-connector
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -14,15 +16,22 @@ jobs:
 
       - name: Download openapi.json
         working-directory: ballerina
-        run: curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
+        run:
+          curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
+          pwd
 
       - name: Remove Specific Files if They Exist
         working-directory: ballerina
         run: |
-          rm -f client.bal
-          rm -f utils.bal
-          rm -f openapi_service.bal
-          rm -f types.bal
+          pwd
+
+        #   - name: Remove Specific Files if They Exist
+        # working-directory: ballerina
+        # run: |
+        #   rm -f client.bal
+        #   rm -f utils.bal
+        #   rm -f openapi_service.bal
+        #   rm -f types.bal
 
       - name: Align OpenAPI Specification
         working-directory: ballerina

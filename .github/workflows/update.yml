@@ -62,7 +62,6 @@ jobs:
         working-directory: ballerina
         run: |
           rm -f client.bal utils.bal types.bal
-          rm -f aligned_ballerina_openapi.json flattened_openapi.json openapi.json
 
       - name: Download or Copy openapi.json
         run: |
@@ -75,36 +74,30 @@ jobs:
           fi
 
       - name: Flatten OpenAPI Specification
+        if: ${{ inputs.flatten_openapi }}
         working-directory: ballerina
         run: |
-          if [ "${{ inputs.flatten_openapi }}" == 'true' ]; then
-            echo "Flattening OpenAPI Specification..."
-            bal openapi flatten -i openapi.json
-          else
-            echo "Skipping OpenAPI flattening."
-            cp openapi.json flattened_openapi.json
-          fi
+          echo "Flattening OpenAPI Specification..."
+          bal openapi flatten -i openapi.json
+          mv flattened_openapi.json openapi.json
 
       - name: Align OpenAPI Specification
         working-directory: ballerina
+        if: ${{ inputs.align_openapi }}
         run: |
-          if [ "${{ inputs.align_openapi }}" == 'true' ]; then
-            echo "Aligning OpenAPI Specification..."
-            bal openapi align -i flattened_openapi.json
-          else
-            echo "Skipping OpenAPI alignment."
-            cp flattened_openapi.json aligned_ballerina_openapi.json
-          fi
+          echo "Aligning OpenAPI Specification..."
+          bal openapi align -i openapi.json
+          mv aligned_ballerina_openapi.json openapi.json
 
       - name: Generate Ballerina Code
         working-directory: ballerina
         run: |
           echo "Generating Ballerina code from OpenAPI Specification..."
-          bal openapi -i aligned_ballerina_openapi.json --mode client
+          bal openapi -i openapi.json --mode client
 
       - name: Clean Up Intermediate Files
         working-directory: ballerina
-        run: rm -f openapi.json flattened_openapi.json aligned_ballerina_openapi.json
+        run: rm -f openapi.json
 
       - name: Build the Package
         env:
@@ -138,11 +131,10 @@ jobs:
               --base main \
               --head update-openapi-connector-${{ github.run_number }}
             echo "Pull request created successfully."
-            echo ${{ inputs.disable_checks }}
           fi
 
       - name: Check PR Build
-        if: ${{ steps.commitChanges.outputs.hasChanged && inputs.disable_checks == 'false' }}
+        if: ${{ steps.commitChanges.outputs.hasChanged && !inputs.disable_checks }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |

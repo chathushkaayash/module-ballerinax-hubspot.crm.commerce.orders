@@ -14,13 +14,35 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Get Ballerina Version
+        run: |
+          BAL_VERSION=$(grep -w 'ballerinaLangVersion' gradle.properties | cut -d= -f2 | rev | cut --complement -d- -f1 | rev)
+          if [ -z "$BAL_VERSION" ]; then
+              BAL_VERSION="latest"
+          fi
+          echo "BAL_VERSION=$BAL_VERSION" >> $GITHUB_ENV
+          echo "Ballerina Version: $BAL_VERSION"
+
+      - name: Set Up Ballerina
+        uses: ballerina-platform/setup-ballerina@v1.1.3
+        with:
+          version: ${{ env.BAL_VERSION }}
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 21.0.3
+
+      - name: Set ENV Variables
+        run: |
+          echo -e '${{ toJson(secrets) }}' | jq -r 'to_entries[] | .key + "=" + .value' >> $GITHUB_ENV
+
       - name: Download openapi.json
         working-directory: ballerina
-        run:
-          curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
+        run: curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
 
       - name: Remove Specific Files if They Exist
-        working-directory: ballerina
         run: |
           pwd
 

@@ -18,7 +18,6 @@ jobs:
         working-directory: ballerina
         run:
           curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
-          pwd
 
       - name: Remove Specific Files if They Exist
         working-directory: ballerina

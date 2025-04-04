@@ -1,0 +1,37 @@
+name: Update openapi-connector
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Update openapi-connector
+    runs-on: ubuntu-latest # Uses latest Ubuntu environment
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Goto to Ballerina Directory
+        run: |
+          cd ballerina
+            echo "Current Directory: $(pwd)"
+
+      - name: Download openapi.json
+        run: curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
+
+      - name: Remove Specific Files if They Exist
+        run: |
+          rm -f client.bal
+          rm -f utils.bal
+          rm -f openapi_service.bal
+          rm -f types.bal
+
+      - name: Align OpenAPI Specification
+        run: bal openapi flatten -i openapi.json
+
+      - name: Flatten OpenAPI Specification
+        run: bal openapi flatten -i aligned_ballerina_openapi.json
+
+      - name: Generate Ballerina Code
+        run: bal openapi -i flattened_openapi.json

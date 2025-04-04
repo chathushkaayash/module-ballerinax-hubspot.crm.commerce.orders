@@ -51,7 +51,7 @@ jobs:
 
       - name: Download openapi.json
         working-directory: ballerina
-        run: curl -o openapi.json https://raw.githubusercontent.com/wso2/api-specs/refs/heads/main/openapi/hubspot/crm.orders/v3/openapi.json
+        run: curl -o openapi.json https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/refs/heads/main/docs/spec/openapi.json
 
       - name: Flatten OpenAPI Specification
         working-directory: ballerina

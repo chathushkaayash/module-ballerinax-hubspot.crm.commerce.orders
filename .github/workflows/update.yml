@@ -106,13 +106,13 @@ jobs:
         working-directory: ballerina
         run: rm -f openapi.json flattened_openapi.json aligned_ballerina_openapi.json
 
-      # - name: Build the Package
-      #   env:
-      #     packageUser: ${{ github.actor }}
-      #     packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
-      #   run: |
-      #     ./gradlew build -x test
-      #     ./gradlew test
+      - name: Build the Package
+        env:
+          packageUser: ${{ github.actor }}
+          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
+        run: |
+          ./gradlew build -x test
+          ./gradlew test
 
       - name: Configure Git Identity
         run: |
@@ -141,7 +141,7 @@ jobs:
           fi
 
       - name: Check PR Build (if not disabled)
-        if: ${{ inputs.disable_checks != 'true' }}
+        if: ${{ steps.commitChanges.outputs.hasChanged }} && ${{ inputs.disable_checks != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |

@@ -4,11 +4,17 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      openapi_url:
+        description: "URL of the OpenAPI JSON (Optional)"
+        required: false
+        type: string
 
 jobs:
   build:
     name: Update openapi-connector
-    runs-on: ubuntu-latest # Uses latest Ubuntu environment
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
@@ -41,17 +47,19 @@ jobs:
       - name: Remove Specific Files if They Exist
         working-directory: ballerina
         run: |
-          rm -f client.bal
-          rm -f utils.bal
-          rm -f openapi_service.bal
-          rm -f types.bal
-          rm -f aligned_ballerina_openapi.json
-          rm -f flattened_openapi.json
-          rm -f openapi.json
+          rm -f client.bal utils.bal types.bal
+          rm -f aligned_ballerina_openapi.json flattened_openapi.json openapi.json
 
-      - name: Download openapi.json
+      - name: Download or Copy openapi.json
         working-directory: ballerina
-        run: curl -o openapi.json https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.commerce.orders/refs/heads/main/docs/spec/openapi.json
+        run: |
+          if [ -n "${{ inputs.openapi_url }}" ]; then
+            echo "Downloading openapi.json from provided URL..."
+            wget -O openapi.json "${{ inputs.openapi_url }}"
+          else
+            echo "Using existing openapi.json from docs/spec directory..."
+            cp docs\spec\openapi.json openapi.json
+          fi
 
       - name: Flatten OpenAPI Specification
         working-directory: ballerina
@@ -67,15 +75,12 @@ jobs:
 
       - name: Post cleanup
         working-directory: ballerina
-        run: |
-          rm -f openapi.json
-          rm -f flattened_openapi.json
-          rm -f aligned_ballerina_openapi.json
+        run: rm -f openapi.json flattened_openapi.json aligned_ballerina_openapi.json
 
       - name: Build the Package
         env:
           packageUser: ${{ github.actor }}
-          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN  }}
+          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
           ./gradlew build -x test
           ./gradlew test

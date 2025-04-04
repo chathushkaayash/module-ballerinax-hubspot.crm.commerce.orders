@@ -59,7 +59,7 @@ jobs:
 
       - name: Align OpenAPI Specification
         working-directory: ballerina
-        run: bal openapi flatten -i ./openapi.json
+        run: bal openapi align -i ./openapi.json
 
       - name: Flatten OpenAPI Specification
         working-directory: ballerina

@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       openapi_url:
-        description: "URL of the OpenAPI JSON (Optional)"
+        description: "URL of the OpenAPI JSON"
         required: false
         type: string
       flatten_openapi:
-        description: "Enable OpenAPI Flattening?"
+        description: "Enable OpenAPI Flattening"
         required: false
         type: boolean
         default: false
       align_openapi:
-        description: "Enable OpenAPI Alignment?"
+        description: "Enable OpenAPI Alignment"
         required: false
         type: boolean
         default: false
       disable_checks:
-        description: "Disable PR checks (Optional)"
+        description: "Disable PR checks"
         required: false
         type: boolean
         default: false
@@ -106,13 +106,13 @@ jobs:
         working-directory: ballerina
         run: rm -f openapi.json flattened_openapi.json aligned_ballerina_openapi.json
 
-      - name: Build the Package
-        env:
-          packageUser: ${{ github.actor }}
-          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
-        run: |
-          ./gradlew build -x test
-          ./gradlew test
+      # - name: Build the Package
+      #   env:
+      #     packageUser: ${{ github.actor }}
+      #     packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
+      #   run: |
+      #     ./gradlew build -x test
+      #     ./gradlew test
 
       - name: Configure Git Identity
         run: |
@@ -141,13 +141,13 @@ jobs:
           fi
 
       - name: Check PR Build (if not disabled)
-        if: ${{ steps.commitChanges.outputs.hasChanged }} && ${{ inputs.disable_checks != 'true' }}
+        if: ${{ steps.commitChanges.outputs.hasChanged && inputs.disable_checks != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
           echo "Waiting for checks to complete..."
           echo ${{ steps.commitChanges.outputs.hasChanged }}
-          echo ${{ inputs.disable_checks }}
+          echo ${{ inputs.disable_checks != 'true' }}
           gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
           sleep 5
 

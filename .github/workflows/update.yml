@@ -1,9 +1,6 @@
 name: Update openapi-connector
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       openapi_url:

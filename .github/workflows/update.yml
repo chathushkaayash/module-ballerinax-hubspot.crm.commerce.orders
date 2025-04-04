@@ -61,14 +61,13 @@ jobs:
           rm -f aligned_ballerina_openapi.json flattened_openapi.json openapi.json
 
       - name: Download or Copy openapi.json
-        working-directory: ballerina
         run: |
           if [ -n "${{ inputs.openapi_url }}" ]; then
             echo "Downloading openapi.json from provided URL..."
-            wget -O openapi.json "${{ inputs.openapi_url }}"
+            wget -O ballerina/openapi.json "${{ inputs.openapi_url }}"
           else
             echo "Using existing openapi.json from docs/spec directory..."
-            cp docs/spec/openapi.json openapi.json
+            cp docs/spec/openapi.json ballerina/openapi.json
           fi
 
       - name: Flatten OpenAPI Specification

@@ -124,8 +124,12 @@ jobs:
           git checkout -b update-openapi-connector-${{ github.run_number }}
           git add .
           git commit -m "[Automated] Update Ballerina OpenAPI Connector"
+          git push origin update-openapi-connector-${{ github.run_number }}
           gh pr create \
             --title "Update OpenAPI Connector" \
             --body "Automated update of the OpenAPI-based Ballerina connector." \
             --base main \
-            --head update-openapi-connector-${{ github.run_number }} || gh pr merge update-openapi-connector --auto --merge
+            --head update-openapi-connector-${{ github.run_number }}
+          gh pr merge update-openapi-connector-${{ github.run_number }} \
+            --auto \
+            --merge

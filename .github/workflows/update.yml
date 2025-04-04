@@ -115,21 +115,28 @@ jobs:
           git config user.email "chathushkaayash@gmail.com"
 
       - name: Commit and Push Changes
+        id: commitChanges
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
           git checkout -b update-openapi-connector-${{ github.run_number }}
           git add .
-          git commit -m "[Automated] Update Ballerina OpenAPI Connector"
-          git push origin update-openapi-connector-${{ github.run_number }}
-          gh pr create \
-            --title "Update OpenAPI Connector" \
-            --body "Automated update of the OpenAPI-based Ballerina connector." \
-            --base main \
-            --head update-openapi-connector-${{ github.run_number }}
-          echo "Pull request created successfully."
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            echo "isChanged=true" >> $GITHUB_OUTPUT
+            git commit -m "[Automated] Update Ballerina OpenAPI Connector"
+            git push origin update-openapi-connector-${{ github.run_number }}
+            gh pr create \
+              --title "Update OpenAPI Connector" \
+              --body "Automated update of the OpenAPI-based Ballerina connector." \
+              --base main \
+              --head update-openapi-connector-${{ github.run_number }}
+            echo "Pull request created successfully."
+          fi
 
       - name: Merge PR
+        if: ${{ steps.commitChanges.outputs.isChanged }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |

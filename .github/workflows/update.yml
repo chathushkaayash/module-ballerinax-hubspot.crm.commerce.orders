@@ -96,7 +96,7 @@ jobs:
         working-directory: ballerina
         run: |
           echo "Generating Ballerina code from OpenAPI Specification..."
-          bal openapi generate -i aligned_ballerina_openapi.json --skip-test --skip-pull-request-check
+          bal openapi -i aligned_ballerina_openapi.json --mode client
 
       - name: Post cleanup
         working-directory: ballerina

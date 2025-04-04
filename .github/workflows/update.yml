@@ -64,3 +64,11 @@ jobs:
       - name: Generate Ballerina Code
         working-directory: ballerina
         run: bal openapi -i flattened_openapi.json
+
+      - name: Build the Package
+        env:
+          packageUser: ${{ github.actor }}
+          packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN  }}
+        run: |
+          ./gradlew build -x test
+          ./gradlew test

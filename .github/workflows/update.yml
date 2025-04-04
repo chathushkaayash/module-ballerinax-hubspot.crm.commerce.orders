@@ -133,8 +133,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
-          # echo "Waiting for checks to complete..."
-          # gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
-          # sleep 5
+          echo "Waiting for checks to complete..."
+          gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
+          sleep 5
           gh pr merge update-openapi-connector-${{ github.run_number }} --merge --delete-branch
           echo "Pull request merged successfully."

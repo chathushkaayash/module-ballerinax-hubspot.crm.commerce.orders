@@ -119,10 +119,13 @@ jobs:
 
       - name: Commit and Push Changes
         env:
-          GH_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
           git checkout -b update-openapi-connector-${{ github.run_number }}
           git add .
           git commit -m "[Automated] Update Ballerina OpenAPI Connector"
-          gh pr create --title "Update OpenAPI Connector" --body "Automated update of the OpenAPI-based Ballerina connector." --base main --head update-openapi-connector-${{ github.run_number }}
-          gh pr merge update-openapi-connector --auto --merge
+          gh pr create \
+            --title "Update OpenAPI Connector" \
+            --body "Automated update of the OpenAPI-based Ballerina connector." \
+            --base main \
+            --head update-openapi-connector-${{ github.run_number }} || gh pr merge update-openapi-connector --auto --merge

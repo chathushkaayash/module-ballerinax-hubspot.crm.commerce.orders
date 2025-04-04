@@ -142,6 +142,8 @@ jobs:
 
       - name: Check PR Build (if not disabled)
         if: ${{ inputs.disable_checks != 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
         run: |
           echo "Waiting for checks to complete..."
           gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20

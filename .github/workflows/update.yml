@@ -10,6 +10,16 @@ on:
         description: "URL of the OpenAPI JSON (Optional)"
         required: false
         type: string
+      flatten_openapi:
+        description: "Enable OpenAPI Flattening?"
+        required: false
+        type: boolean
+        default: false
+      align_openapi:
+        description: "Enable OpenAPI Alignment?"
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -58,20 +68,36 @@ jobs:
             wget -O openapi.json "${{ inputs.openapi_url }}"
           else
             echo "Using existing openapi.json from docs/spec directory..."
-            cp docs\spec\openapi.json openapi.json
+            cp docs/spec/openapi.json openapi.json
           fi
 
       - name: Flatten OpenAPI Specification
         working-directory: ballerina
-        run: bal openapi flatten -i openapi.json
+        run: |
+          if [ "${{ inputs.flatten_openapi }}" == 'true' ]; then
+            echo "Flattening OpenAPI Specification..."
+            bal openapi flatten -i openapi.json
+          else
+            echo "Skipping OpenAPI flattening."
+            cp openapi.json flattened_openapi.json
+          fi
 
       - name: Align OpenAPI Specification
         working-directory: ballerina
-        run: bal openapi align -i flattened_openapi.json
+        run: |
+          if [ "${{ inputs.align_openapi }}" == 'true' ]; then
+            echo "Aligning OpenAPI Specification..."
+            bal openapi align -i flattened_openapi.json
+          else
+            echo "Skipping OpenAPI alignment."
+            cp flattened_openapi.json aligned_ballerina_openapi.json
+          fi
 
       - name: Generate Ballerina Code
         working-directory: ballerina
-        run: bal openapi -i aligned_ballerina_openapi.json --mode client
+        run: |
+          echo "Generating Ballerina code from OpenAPI Specification..."
+          bal openapi generate -i aligned_ballerina_openapi.json --skip-test --skip-pull-request-check
 
       - name: Post cleanup
         working-directory: ballerina

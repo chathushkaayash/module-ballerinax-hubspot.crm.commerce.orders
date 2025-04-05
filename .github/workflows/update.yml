@@ -108,7 +108,7 @@ jobs:
         id: commitFiles
         run: |
           git checkout -b update-openapi-connector-${{ github.run_number }}
-          git add -u
+          git add .
           if git diff --cached --quiet;
           then
               echo "hasChanged=false" >> $GITHUB_OUTPUT

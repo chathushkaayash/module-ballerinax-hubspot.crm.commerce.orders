@@ -127,12 +127,13 @@ jobs:
       - name: Create Pull Request
         id: createPR
         if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
-        run: echo "prUrl=$(\
-          gh pr create \
-          --title "[Automated] Update OpenAPI Connector"" \
-          --body "Automated update of the OpenAPI-based Ballerina connector." \
-          --base ${{ github.ref }} \
-          --head update-openapi-connector-${{ github.run_number }})" >> $GITHUB_OUTPUT
+        run: |
+          prUrl=$(gh pr create \
+            --title "[Automated] Update OpenAPI Connector" \
+            --body "Automated update of the OpenAPI-based Ballerina connector." \
+            --base ${{ github.ref }} \
+            --head update-openapi-connector-${{ github.run_number }})
+          echo "prUrl=$prUrl" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
 

@@ -167,20 +167,3 @@ jobs:
           gh pr merge --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
-
-      # - name: Check PR Build
-      #   if: ${{ steps.commitChanges.outputs.hasChanged && !inputs.disable_checks }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
-      #   run: |
-      #     echo "Waiting for checks to complete..."
-      #     gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
-      #     sleep 5
-
-      # - name: Merge PR
-      #   if: ${{ steps.commitChanges.outputs.hasChanged }}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
-      #   run: |
-      #     gh pr merge update-openapi-connector-${{ github.run_number }} --merge --delete-branch
-      # echo "Pull request merged successfully."

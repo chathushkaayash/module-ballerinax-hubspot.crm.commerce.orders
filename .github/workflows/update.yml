@@ -17,11 +17,6 @@ on:
         required: false
         type: boolean
         default: false
-      disable_checks:
-        description: "Disable PR checks"
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   build:
@@ -163,7 +158,7 @@ jobs:
 
             if [[ "$incompleteCount" -eq 0 ]]; then
               checkComplete="1"
-              echo "All required checks have passed or were skipped."
+              echo "All required checks have passed."
             else
               echo "Waiting for checks to complete... ($incompleteCount remaining)"
             fi

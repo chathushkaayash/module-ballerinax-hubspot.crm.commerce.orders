@@ -171,7 +171,7 @@ jobs:
           sleep 20
           gh pr merge --merge --delete-branch
         env:
-          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}te
+          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
 
       # - name: Check PR Build
       #   if: ${{ steps.commitChanges.outputs.hasChanged && !inputs.disable_checks }}

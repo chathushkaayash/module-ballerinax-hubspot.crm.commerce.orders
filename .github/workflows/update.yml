@@ -148,22 +148,30 @@ jobs:
       - name: Merge PR
         if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
         run: |
-          checkCount="0"
-          while [ "$checkCount" != "1" ]
-          do
+          checkComplete="0"
+          while [ "$checkComplete" != "1" ]; do
             sleep 20
-            checkCount=$(gh pr status --jq '[.currentBranch .statusCheckRollup[] | select((.conclusion=="SUCCESS") and ((.name=="Build on Ubuntu")))] | length' --json statusCheckRollup)
-            failedCount=$(gh pr status --jq '[.currentBranch .statusCheckRollup[] | select((.conclusion=="FAILURE") and ((.name=="Build on Ubuntu")))] | length' --json statusCheckRollup)
-            if [[ "$failedCount" != "0" ]]
-            then
-              echo "PR Build has Failed"
+
+            allChecks=$(gh pr status --json statusCheckRollup --jq '.currentBranch.statusCheckRollup')
+            failedCount=$(echo "$allChecks" | jq '[.[] | select(.conclusion == "FAILURE" or .conclusion == "CANCELLED")] | length')
+            incompleteCount=$(echo "$allChecks" | jq '[.[] | select(.conclusion != "SUCCESS" and .conclusion != "SKIPPED" and .conclusion != "FAILURE" and .conclusion != "CANCELLED")] | length')
+
+            if [[ "$failedCount" -gt 0 ]]; then
+              echo "Some status checks failed or were cancelled."
               exit 1
+            fi
+
+            if [[ "$incompleteCount" -eq 0 ]]; then
+              checkComplete="1"
+              echo "All required checks have passed or were skipped."
+            else
+              echo "Waiting for checks to complete... ($incompleteCount remaining)"
             fi
           done
           sleep 20
           gh pr merge --merge --delete-branch
         env:
-          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}te
 
       # - name: Check PR Build
       #   if: ${{ steps.commitChanges.outputs.hasChanged && !inputs.disable_checks }}

@@ -143,7 +143,7 @@ jobs:
           sleep 5
           gh pr review --approve ${{ steps.createPR.outputs.prUrl }}
         env:
-          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BALLERINA_REVIEWER_BOT_TOKEN }}
 
       - name: Merge PR
         if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}

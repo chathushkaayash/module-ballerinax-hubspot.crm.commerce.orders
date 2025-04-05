@@ -104,40 +104,79 @@ jobs:
           git config user.name "chathushkaayash"
           git config user.email "chathushkaayash@gmail.com"
 
-      - name: Commit and Push Changes
-        id: commitChanges
-        env:
-          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+      - name: Commit Files
+        id: commitFiles
         run: |
           git checkout -b update-openapi-connector-${{ github.run_number }}
-          git add .
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
+          git add -u
+          if git diff-index --quiet HEAD --;
+          then
+              printf "::set-output name=hasChanged::false"
+              echo "No changes to commit."
           else
-            echo "hasChanged=true" >> $GITHUB_OUTPUT
-            git commit -m "[Automated] Update Ballerina OpenAPI Connector"
-            git push origin update-openapi-connector-${{ github.run_number }}
-            gh pr create \
-              --title "Update OpenAPI Connector" \
-              --body "Automated update of the OpenAPI-based Ballerina connector." \
-              --base main \
-              --head update-openapi-connector-${{ github.run_number }}
-            echo "Pull request created successfully."
+              git commit -m "[AUTOMATED] Update the OpenAPI Connector"
+              printf "::set-output name=hasChanged::true"
           fi
 
-      - name: Check PR Build
-        if: ${{ steps.commitChanges.outputs.hasChanged && !inputs.disable_checks }}
+      - name: Push Results
+        if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
+        run: git push origin update-openapi-connector-${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+
+      - name: Create Pull Request
+        id: createPR
+        if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
+        run: printf "::set-output name=prUrl::$(\
+          gh pr create \
+          --title "[Automated] Update OpenAPI Connector"" \
+          --body "Automated update of the OpenAPI-based Ballerina connector." \
+          --base ${{ github.ref }} \
+          --head update-openapi-connector-${{ github.run_number }})"
+        env:
+          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+
+      - name: Approve PR
+        if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
         run: |
-          echo "Waiting for checks to complete..."
-          gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
           sleep 5
+          gh pr review --approve ${{ steps.createPR.outputs.prUrl }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
 
       - name: Merge PR
-        if: ${{ steps.commitChanges.outputs.hasChanged }}
+        if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
+        run: |
+          checkCount="0"
+          while [ "$checkCount" != "1" ]
+          do
+            sleep 20
+            checkCount=$(gh pr status --jq '[.currentBranch .statusCheckRollup[] | select((.conclusion=="SUCCESS") and ((.name=="Build on Ubuntu")))] | length' --json statusCheckRollup)
+            failedCount=$(gh pr status --jq '[.currentBranch .statusCheckRollup[] | select((.conclusion=="FAILURE") and ((.name=="Build on Ubuntu")))] | length' --json statusCheckRollup)
+            if [[ "$failedCount" != "0" ]]
+            then
+              echo "PR Build has Failed"
+              exit 1
+            fi
+          done
+          sleep 20
+          gh pr merge --merge --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
-        run: |
-          gh pr merge update-openapi-connector-${{ github.run_number }} --merge --delete-branch
-          echo "Pull request merged successfully."
+
+      # - name: Check PR Build
+      #   if: ${{ steps.commitChanges.outputs.hasChanged && !inputs.disable_checks }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+      #   run: |
+      #     echo "Waiting for checks to complete..."
+      #     gh pr checks update-openapi-connector-${{ github.run_number }} --required --watch --interval 20
+      #     sleep 5
+
+      # - name: Merge PR
+      #   if: ${{ steps.commitChanges.outputs.hasChanged }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
+      #   run: |
+      #     gh pr merge update-openapi-connector-${{ github.run_number }} --merge --delete-branch
+      # echo "Pull request merged successfully."

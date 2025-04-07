@@ -1,4 +1,4 @@
-name: Update openapi-connector
+name: Regenerate openapi-connector
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ on:
 
 jobs:
   build:
-    name: Update openapi-connector
+    name: Regenerate openapi-connector
     runs-on: ubuntu-latest
 
     steps:
@@ -102,20 +102,20 @@ jobs:
       - name: Commit Files
         id: commitFiles
         run: |
-          git checkout -b update-openapi-connector-${{ github.run_number }}
+          git checkout -b regenerate-openapi-connector-${{ github.run_number }}
           git add .
           if git diff --cached --quiet;
           then
               echo "hasChanged=false" >> $GITHUB_OUTPUT
               echo "No changes to commit."
           else
-              git commit -m "[AUTOMATED] Update the OpenAPI Connector"
+              git commit -m "[AUTOMATED] Regenerate the OpenAPI Connector"
               echo "hasChanged=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Push Results
         if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
-        run: git push origin update-openapi-connector-${{ github.run_number }}
+        run: git push origin regenerate-openapi-connector-${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}
 
@@ -124,10 +124,10 @@ jobs:
         if: ${{ steps.commitFiles.outputs.hasChanged == 'true' }}
         run: |
           prUrl=$(gh pr create \
-            --title "[Automated] Update OpenAPI Connector" \
-            --body "Automated update of the OpenAPI-based Ballerina connector." \
+            --title "[Automated] Regenerate OpenAPI Connector" \
+            --body "Automated regenerate of the OpenAPI-based Ballerina connector." \
             --base ${{ github.ref }} \
-            --head update-openapi-connector-${{ github.run_number }})
+            --head regenerate-openapi-connector-${{ github.run_number }})
           echo "prUrl=$prUrl" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.BALLERINA_BOT_TOKEN }}

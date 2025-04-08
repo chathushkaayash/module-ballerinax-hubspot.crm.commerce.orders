@@ -1,4 +1,4 @@
-name: Regenerate openapi-connector
+name: Regenerate OpenAPI Connector
 
 on:
   workflow_dispatch:
@@ -32,8 +32,6 @@ on:
         required: false
         type: string
         default: ""
-  repository_dispatch:
-    types: [stdlib-release-pipeline]
 
 jobs:
   call_workflow:

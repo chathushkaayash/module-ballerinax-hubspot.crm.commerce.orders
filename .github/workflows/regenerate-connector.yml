@@ -1,0 +1,50 @@
+name: Regenerate openapi-connector
+
+on:
+  workflow_dispatch:
+    inputs:
+      openapi-url:
+        description: "URL of the OpenAPI JSON"
+        required: false
+        type: string
+      flatten-openapi:
+        description: "Enable OpenAPI Flattening"
+        required: false
+        type: boolean
+        default: false
+      additional-flatten-flags:
+        description: "Additional flags for OpenAPI Flattening"
+        required: false
+        type: string
+        default: ""
+      align-openapi:
+        description: "Enable OpenAPI Alignment"
+        required: false
+        type: boolean
+        default: false
+      additional-align-flags:
+        description: "Additional flags for OpenAPI Alignment"
+        required: false
+        type: string
+        default: ""
+      distribution-zip:
+        description: "Distribution of the Ballerina version to be used"
+        required: false
+        type: string
+        default: ""
+  repository_dispatch:
+    types: [stdlib-release-pipeline]
+
+jobs:
+  call_workflow:
+    name: Run Regenerate Connector Workflow
+    # if: ${{ github.repository_owner == 'ballerina-platform' }}
+    uses: chathushkaayash/ballerina-library/.github/workflows/regenerate-connector-template.yml@main
+    secrets: inherit
+    with:
+      openapi-url: ${{ inputs.openapi-url }}
+      flatten-openapi: ${{ inputs.flatten-openapi }}
+      additional-flatten-flags: ${{ inputs.additional-flatten-flags }}
+      align-openapi: ${{ inputs.align-openapi }}
+      additional-align-flags: ${{ inputs.additional-align-flags  }}
+      distribution-zip: ${{ inputs.distribution-zip }}

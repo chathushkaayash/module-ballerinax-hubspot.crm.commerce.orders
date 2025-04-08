@@ -1,2 +1,0 @@
-$ bal run computed_field_key.bal
-{"name":"John","unique-identifier":"stu123","_school":"West High"}

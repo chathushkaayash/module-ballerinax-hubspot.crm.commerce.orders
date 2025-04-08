@@ -1,2 +1,0 @@
-$ bal run task_one_time_job_execution.bal
-MyCounter: 1

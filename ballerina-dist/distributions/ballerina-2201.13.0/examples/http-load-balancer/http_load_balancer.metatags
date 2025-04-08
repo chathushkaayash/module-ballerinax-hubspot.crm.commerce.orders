@@ -1,2 +1,0 @@
-description: This example is on how to use an HTTP load balancer in Ballerina to balance the load of an endpoint using a given algorithm.
-keywords: ballerina, ballerina by examples, bbe, http, resiliency, load balancer, load balance

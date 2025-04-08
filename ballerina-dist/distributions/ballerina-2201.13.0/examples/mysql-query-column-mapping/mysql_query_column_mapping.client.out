@@ -1,2 +1,0 @@
-$ curl http://localhost:8080/artists
-[{"artistId":1, "lastName":"Knowles", "firstName":"Beyonce"}, {"artistId":2, "lastName":"Fenty", "firstName":"Rihanna"}]

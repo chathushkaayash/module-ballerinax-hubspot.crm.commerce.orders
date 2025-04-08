@@ -1,6 +1,0 @@
-mutation {
-    updateName(id: 1, name: "Mr. Lambert") {
-        id
-        name
-    }
-}

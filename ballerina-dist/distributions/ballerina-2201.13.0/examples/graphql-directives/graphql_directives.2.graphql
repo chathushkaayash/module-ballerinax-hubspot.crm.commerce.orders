@@ -1,6 +1,0 @@
-{
-    profile {
-        name
-        gender @include(if: true) {
-    }
-}

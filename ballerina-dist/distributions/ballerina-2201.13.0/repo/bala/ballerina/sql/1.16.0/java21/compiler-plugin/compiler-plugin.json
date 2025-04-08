@@ -1,7 +1,0 @@
-{
-  "plugin_id": "sql-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.sql.compiler.SQLCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/sql-compiler-plugin-1.16.0.jar"
-  ]
-}

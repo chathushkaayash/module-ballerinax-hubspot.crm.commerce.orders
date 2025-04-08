@@ -1,5 +1,0 @@
-$ bal run singleton_types.bal
-true
-false
-true
-false

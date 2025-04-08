@@ -1,7 +1,0 @@
-{
-  "plugin_id": "udp-plugin",
-  "plugin_class": "io.ballerina.stdlib.udp.compiler.UdpCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/udp-compiler-plugin-1.13.0.jar"
-  ]
-}

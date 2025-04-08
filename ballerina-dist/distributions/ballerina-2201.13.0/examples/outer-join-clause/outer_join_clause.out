@@ -1,2 +1,0 @@
-$ bal run outer_join_clause.bal
-[{"fname":"Alex","dept":"HR"},{"fname":"John","dept":"Operations"},{"fname":"Ted","dept":null}]

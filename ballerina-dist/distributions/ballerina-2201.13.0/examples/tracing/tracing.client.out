@@ -1,2 +1,0 @@
-$ curl http://localhost:9234/hello/sayHello
-Hello, World!

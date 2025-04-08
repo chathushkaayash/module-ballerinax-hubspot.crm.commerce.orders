@@ -1,5 +1,0 @@
-$ bal run waiting_for_workers.bal
-Initializing
-In function worker
-In worker A
-After wait A

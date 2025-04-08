@@ -1,7 +1,0 @@
-{
-  "plugin_id": "io-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.io.compiler.IOCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/io-compiler-plugin-1.8.0.jar"
-  ]
-}

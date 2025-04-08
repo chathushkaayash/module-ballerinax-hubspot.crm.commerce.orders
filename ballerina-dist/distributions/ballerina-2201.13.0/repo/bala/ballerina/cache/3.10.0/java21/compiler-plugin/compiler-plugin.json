@@ -1,7 +1,0 @@
-{
-  "plugin_id": "cache-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.cache.compiler.CacheCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/cache-compiler-plugin-3.10.0.jar"
-  ]
-}

@@ -1,2 +1,0 @@
-$ bal run udp_listener.bal
-Received by listener: Hello Ballerina echo

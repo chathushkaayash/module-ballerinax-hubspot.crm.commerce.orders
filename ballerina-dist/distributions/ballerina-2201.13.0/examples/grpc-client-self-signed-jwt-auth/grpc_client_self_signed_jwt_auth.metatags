@@ -1,2 +1,0 @@
-description: BBE on how to secure gRPC client with self-signed JWT Auth in Ballerina.
-keywords: ballerina, ballerina by example, bbe, grpc, auth, jwt auth

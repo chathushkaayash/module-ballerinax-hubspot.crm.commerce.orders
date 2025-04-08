@@ -1,7 +1,0 @@
-{
-  "plugin_id": "xmldata-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.xmldata.compiler.XmldataCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/xmldata-compiler-plugin-2.9.0.jar"
-  ]
-}

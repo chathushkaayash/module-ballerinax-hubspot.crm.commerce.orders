@@ -1,2 +1,0 @@
-$ bal run multiple_wait.bal
-{"a":"{"lang":"ballerina"}","b":"{"greeting":"hello"}"}

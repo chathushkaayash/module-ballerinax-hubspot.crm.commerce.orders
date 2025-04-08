@@ -1,2 +1,0 @@
-$ curl -X POST -H "Content-type: application/json" -H "scope: admin" -d '{ "query": "{ profile(id: 1) { name age } }" }' 'http://localhost:9090/graphql'
-{"data":{"profile":{"name":"Walter White", "age":50}}}

@@ -1,7 +1,0 @@
-{
-  "plugin_id": "ftp-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.ftp.plugin.FtpCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/ftp-compiler-plugin-2.13.1-20250328-123000-52b0ab7.jar"
-  ]
-}

@@ -1,2 +1,0 @@
-$ bal run graphql_client_security_basic_auth.bal
-{"name":"Walter White","age":51}

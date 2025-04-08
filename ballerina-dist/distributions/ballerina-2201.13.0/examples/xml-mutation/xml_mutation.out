@@ -1,3 +1,0 @@
-$ bal run xml_mutation.bal
-<details><language>French</language></details>
-<updatedDetails><language>French</language></updatedDetails>

@@ -1,7 +1,0 @@
-{
-  "plugin_id": "mqtt-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.mqtt.compiler.MqttCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/mqtt-compiler-plugin-1.4.0.jar"
-  ]
-}

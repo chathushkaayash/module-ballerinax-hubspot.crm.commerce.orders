@@ -1,7 +1,0 @@
-$ bal distinct_object_types.bal
-false
-true
-true
-true
-true
-false

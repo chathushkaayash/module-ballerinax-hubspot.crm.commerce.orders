@@ -1,3 +1,0 @@
-$ bal run csv_user_configurations.bal
-[{"id":1,"name":"O"Connor","department":"Engineering"},{"id":3,"name":"Jane","department":"Finance"}]
-[{"id":1,"department":"Engineering"},{"id":3,"department":"Finance"}]

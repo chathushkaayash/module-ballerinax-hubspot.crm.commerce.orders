@@ -1,3 +1,0 @@
-$ bal run xml_templates.bal
-<a href="https://ballerina.io">Ballerina</a> is an <em>exciting</em> new language!
-<p><a href="https://ballerina.io">Ballerina</a> is an <em>exciting</em> new language!</p>

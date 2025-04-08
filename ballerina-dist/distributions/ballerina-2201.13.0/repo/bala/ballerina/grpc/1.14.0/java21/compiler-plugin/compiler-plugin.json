@@ -1,7 +1,0 @@
-{
-  "plugin_id": "grpc-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.grpc.plugin.GrpcCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/grpc-compiler-plugin-1.14.0.jar"
-  ]
-}

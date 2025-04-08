@@ -1,8 +1,0 @@
-{
-    profiles {
-        name
-        ... on Teacher {
-            subject
-        }
-    }
-}

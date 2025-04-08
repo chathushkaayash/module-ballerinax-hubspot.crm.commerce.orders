@@ -1,2 +1,0 @@
-$ nc -u localhost 8080
-Hello, Ballerina

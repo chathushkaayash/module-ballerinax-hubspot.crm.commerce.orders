@@ -1,7 +1,0 @@
-{
-  "plugin_id": "constraint-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.constraint.compiler.ConstraintCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/constraint-compiler-plugin-1.7.0.jar"
-  ]
-}

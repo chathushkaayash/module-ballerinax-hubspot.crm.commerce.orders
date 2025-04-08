@@ -1,2 +1,0 @@
-$ bal run xml_templates_and_query.bal
-<data><person country="USA">Jane</person><person country="Germany">Mike</person></data>

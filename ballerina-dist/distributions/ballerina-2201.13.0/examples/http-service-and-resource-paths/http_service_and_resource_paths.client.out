@@ -1,2 +1,0 @@
-$ curl http://localhost:9090/info/albums
-[{"title":"Blue Train", "artist":"John Coltrane"}, {"title":"Jeru", "artist":"Gerry Mulligan"}]

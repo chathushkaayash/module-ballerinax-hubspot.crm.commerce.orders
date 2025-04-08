@@ -1,7 +1,0 @@
-{
-  "plugin_id": "websocket-compiler-plugin",
-  "plugin_class": "io.ballerina.stdlib.websocket.plugin.WebSocketCompilerPlugin",
-  "dependency_paths": [
-    "compiler-plugin/libs/websocket-compiler-plugin-2.14.0.jar"
-  ]
-}

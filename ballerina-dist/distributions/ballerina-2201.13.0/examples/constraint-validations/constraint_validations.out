@@ -1,2 +1,0 @@
-$ bal run constraint_validations.bal
-error: Validation failed for '$.age:minValue' constraint(s).

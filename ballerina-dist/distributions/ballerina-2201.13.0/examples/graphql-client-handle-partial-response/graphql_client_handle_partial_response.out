@@ -1,3 +1,0 @@
-$ bal run graphql_client_handle_partial_response.bal
-{"profile":{"name":"Walter White","age":null}}
-[{"message":"Error occurred while retrieving age","locations":[{"line":1,"column":26}],"path":["profile","age"]}]

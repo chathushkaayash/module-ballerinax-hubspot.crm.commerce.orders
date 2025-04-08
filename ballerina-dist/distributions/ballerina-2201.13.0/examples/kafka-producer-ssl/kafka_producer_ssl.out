@@ -1,2 +1,0 @@
-$ bal run kafka_client_producer_ssl.bal
-Message published successfully.

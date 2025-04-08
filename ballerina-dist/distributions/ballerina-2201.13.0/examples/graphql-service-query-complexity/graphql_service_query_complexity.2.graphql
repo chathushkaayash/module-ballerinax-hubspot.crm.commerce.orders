@@ -1,9 +1,0 @@
-query {
-    profile1: profile(id: 1) {
-        name
-        age
-    }
-    profile2: profile(id: 2) {
-        age
-    }
-}

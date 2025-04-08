@@ -1,3 +1,0 @@
-$ bal run multiple_key_fields.bal
-{"firstName":"John","lastName":"Bloggs","salary":200}
-{"firstName":"John","lastName":"Smith","salary":100}

@@ -1,2 +1,0 @@
-$ bal run init_function.bal
-error: Value should less than 3

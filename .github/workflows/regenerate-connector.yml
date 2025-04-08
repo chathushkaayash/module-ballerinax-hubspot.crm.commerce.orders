@@ -27,6 +27,11 @@ on:
         required: false
         type: string
         default: ""
+      distribution-zip:
+        description: "Distribution of the Ballerina version to be used"
+        required: false
+        type: string
+        default: ""
   repository_dispatch:
     types: [stdlib-release-pipeline]
 
@@ -42,3 +47,4 @@ jobs:
       additional-flatten-flags: ${{ inputs.additional-flatten-flags }}
       align-openapi: ${{ inputs.align-openapi }}
       additional-align-flags: ${{ inputs.additional-align-flags  }}
+      distribution-zip: ${{ inputs.distribution-zip }}

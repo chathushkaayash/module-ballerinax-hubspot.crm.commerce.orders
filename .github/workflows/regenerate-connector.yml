@@ -37,8 +37,8 @@ jobs:
     uses: chathushkaayash/ballerina-library/.github/workflows/regenerate-connector-template.yml@main
     secrets: inherit
     with:
-      openapi-url: ${{ github.event.inputs.openapi-url || github.event.client_payload.openapi_url }}
-      flatten-openapi: ${{ github.event.inputs.flatten-openapi || github.event.client_payload.flatten_openapi }}
-      additional-flatten-flags: ${{ github.event.inputs.additional-flatten-flags || github.event.client_payload.additional_flatten_flags }}
-      align-openapi: ${{ github.event.inputs.align-openapi || github.event.client_payload.align_openapi }}
-      additional-align-flags: ${{ github.event.inputs.additional-align-flags || github.event.client_payload.additional_align_flags }}
+      openapi-url: ${{ inputs.openapi-url }}
+      flatten-openapi: ${{ inputs.flatten-openapi }}
+      additional-flatten-flags: ${{ inputs.additional-flatten-flags }}
+      align-openapi: ${{ inputs.align-openapi }}
+      additional-align-flags: ${{ inputs.additional-align-flags  }}

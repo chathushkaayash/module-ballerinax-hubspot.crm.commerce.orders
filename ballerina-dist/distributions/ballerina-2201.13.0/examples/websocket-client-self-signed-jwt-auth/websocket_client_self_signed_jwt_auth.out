@@ -1,0 +1,2 @@
+$ bal run websocket_client_self_signed_jwt_auth.bal
+Hello, How are you?

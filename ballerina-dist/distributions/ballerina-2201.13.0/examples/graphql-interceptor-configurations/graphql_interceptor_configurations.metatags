@@ -1,0 +1,2 @@
+description: This example demonstrates configuring the behavior of a GraphQL interceptor.
+keywords: ballerina, ballerina by example, bbe, graphql, service, interceptor

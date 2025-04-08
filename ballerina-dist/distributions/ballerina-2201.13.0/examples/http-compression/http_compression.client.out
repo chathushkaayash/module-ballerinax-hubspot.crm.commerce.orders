@@ -1,0 +1,16 @@
+$ curl -v --output - http://localhost:9090/compress
+> GET /compress HTTP/1.1
+> Host: localhost:9090
+> User-Agent: curl/7.58.0
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< content-type: text/plain
+< server: ballerina
+< content-encoding: gzip
+< content-length: 48
+<
+�
+* Connection #0 to host localhost left intact
+�,HU���,V�D�⒢̼t��ʴ��
+

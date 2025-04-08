@@ -1,0 +1,2 @@
+$ bal run xml_namespaces.bal
+{http://example.com/}e

@@ -1,0 +1,4 @@
+$ bal run match_statement_with_maps.bal
+Int: 100
+Int: 10
+invalid command

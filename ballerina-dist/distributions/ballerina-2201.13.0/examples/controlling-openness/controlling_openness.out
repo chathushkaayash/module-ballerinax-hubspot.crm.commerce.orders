@@ -1,0 +1,4 @@
+$ bal run controlling_openness.bal
+{"name":"Anne","country":"UK"}
+Science
+{"name":"Anne","country":"UK","faculty":"Science"}

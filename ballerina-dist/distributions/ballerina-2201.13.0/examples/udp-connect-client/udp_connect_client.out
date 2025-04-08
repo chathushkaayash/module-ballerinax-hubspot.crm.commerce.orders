@@ -1,0 +1,3 @@
+$ bal run udp_connect_client.bal
+Data was sent to the remote host.
+Received: Hello Ballerina echo

@@ -1,0 +1,53 @@
+{
+  "organization": "ballerina",
+  "name": "observe",
+  "version": "1.5.0",
+  "export": [
+    "observe",
+    "observe.mockextension"
+  ],
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "java21",
+  "platformDependencies": [
+    {
+      "path": "platform/java21/observe-native-1.5.0.jar"
+    },
+    {
+      "path": "platform/java21/opentelemetry-sdk-trace-1.0.0.jar",
+      "artifactId": "opentelemetry-sdk-trace",
+      "groupId": "io.opentelemetry",
+      "version": "1.0.0"
+    },
+    {
+      "path": "platform/java21/opentelemetry-sdk-testing-1.0.0.jar",
+      "artifactId": "opentelemetry-sdk-testing",
+      "groupId": "io.opentelemetry",
+      "version": "1.0.0"
+    },
+    {
+      "path": "platform/java21/opentelemetry-sdk-common-1.0.0.jar",
+      "artifactId": "opentelemetry-sdk-common",
+      "groupId": "io.opentelemetry",
+      "version": "1.0.0"
+    },
+    {
+      "path": "platform/java21/opentelemetry-semconv-1.0.0-alpha.jar",
+      "artifactId": "opentelemetry-semconv",
+      "groupId": "io.opentelemetry",
+      "version": "1.0.0-alpha"
+    }
+  ],
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md",
+  "modules": [
+    {
+      "name": "observe.mockextension",
+      "export": true,
+      "description": "This module provides mock extension to observe Ballerina applications.",
+      "readme": "docs/modules/observe.mockextension/README.md"
+    }
+  ]
+}

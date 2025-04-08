@@ -1,0 +1,63 @@
+{
+  "organization": "ballerina",
+  "name": "email",
+  "version": "2.12.0",
+  "licenses": [
+    "Apache-2.0"
+  ],
+  "authors": [
+    "Ballerina"
+  ],
+  "source_repository": "https://github.com/ballerina-platform/module-ballerina-email",
+  "keywords": [
+    "email",
+    "SMTP",
+    "POP",
+    "POP3",
+    "IMAP",
+    "mail"
+  ],
+  "export": [
+    "email"
+  ],
+  "icon": "docs/icon.png",
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "java21",
+  "platformDependencies": [
+    {
+      "path": "platform/java21/javax.mail-1.6.2.jar",
+      "artifactId": "javax.mail",
+      "groupId": "com.sun.mail",
+      "version": "1.6.2"
+    },
+    {
+      "path": "platform/java21/greenmail-1.5.11.jar",
+      "artifactId": "greenmail",
+      "groupId": "com.icegreen",
+      "version": "1.5.11"
+    },
+    {
+      "path": "platform/java21/mimepull-1.9.11.jar",
+      "artifactId": "mimepull",
+      "groupId": "org.jvnet.mimepull",
+      "version": "1.9.11"
+    },
+    {
+      "path": "platform/java21/activation-1.1.1.jar",
+      "artifactId": "activation",
+      "groupId": "javax.activation",
+      "version": "1.1.1"
+    },
+    {
+      "path": "platform/java21/email-native-2.12.0.jar",
+      "artifactId": "email-native",
+      "groupId": "io.ballerina.stdlib",
+      "version": "2.12.0"
+    }
+  ],
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md"
+}

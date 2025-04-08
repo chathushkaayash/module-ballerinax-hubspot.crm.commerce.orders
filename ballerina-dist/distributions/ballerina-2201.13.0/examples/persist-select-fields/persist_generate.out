@@ -1,0 +1,3 @@
+$ bal persist generate --datastore inmemory --module store
+
+Persist client and entity types generated successfully in the store directory.

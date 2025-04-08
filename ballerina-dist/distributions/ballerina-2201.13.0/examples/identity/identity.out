@@ -1,0 +1,7 @@
+$ bal run identity.bal
+true
+false
+true
+false
+true
+false

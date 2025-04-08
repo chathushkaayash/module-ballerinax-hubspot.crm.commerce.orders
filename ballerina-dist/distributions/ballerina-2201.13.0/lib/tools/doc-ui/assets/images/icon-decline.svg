@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>E2D309C7-D16D-4CB5-848B-A4CD3ACB8EE8</title>
+    <defs>
+        <path d="M3.97685892,3.16760249 L8,7.191 L12.0231411,3.16760249 C12.2466111,2.9441325 12.6089275,2.9441325 12.8323975,3.16760249 C13.0558675,3.39107249 13.0558675,3.75338893 12.8323975,3.97685892 L8.809,8 L12.8323975,12.0231411 C13.0558675,12.2466111 13.0558675,12.6089275 12.8323975,12.8323975 C12.6089275,13.0558675 12.2466111,13.0558675 12.0231411,12.8323975 L8,8.809 L3.97685892,12.8323975 C3.75338893,13.0558675 3.39107249,13.0558675 3.16760249,12.8323975 C2.9441325,12.6089275 2.9441325,12.2466111 3.16760249,12.0231411 L7.191,8 L3.16760249,3.97685892 C2.9441325,3.75338893 2.9441325,3.39107249 3.16760249,3.16760249 C3.39107249,2.9441325 3.75338893,2.9441325 3.97685892,3.16760249 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ballerina-UI-kit" transform="translate(-800.000000, -507.000000)">
+            <g id="Button/Rounded/32-with-icon/Default" transform="translate(792.000000, 499.000000)">
+                <g id="Icon/Clear" transform="translate(8.000000, 8.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Combined-Shape" fill="#FE523C" fill-rule="nonzero" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

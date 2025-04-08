@@ -1,0 +1,2 @@
+description: This example demonstrates returning service objects from the resource or remote methods of a GraphQL service.
+keywords: ballerina, ballerina by example, bbe, graphql, service objects

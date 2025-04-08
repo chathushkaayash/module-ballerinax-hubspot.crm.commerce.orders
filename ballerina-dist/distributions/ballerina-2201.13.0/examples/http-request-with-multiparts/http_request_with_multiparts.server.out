@@ -1,0 +1,7 @@
+$ bal run request_with_multiparts.bal
+time = 2021-01-21 22:00:17,167 level = INFO  module = "" message = "{"name":"ballerina"}"
+time = 2021-01-21 22:01:18,466 level = INFO  module = "" message = "{"name":"wso2"}"
+time = 2021-01-21 22:01:18,682 level = INFO  module = "" message = "<ballerinalang>
+    <version>0.963</version>
+    <test>test xml file to be used as a file part</test>
+</ballerinalang>"

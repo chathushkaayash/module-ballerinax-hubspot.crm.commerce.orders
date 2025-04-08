@@ -1,0 +1,52 @@
+{
+  "organization": "ballerina",
+  "name": "os",
+  "version": "1.10.0",
+  "licenses": [
+    "Apache-2.0"
+  ],
+  "authors": [
+    "Ballerina"
+  ],
+  "source_repository": "https://github.com/ballerina-platform/module-ballerina-os",
+  "keywords": [
+    "environment"
+  ],
+  "export": [
+    "os"
+  ],
+  "icon": "docs/icon.png",
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "java21",
+  "platformDependencies": [
+    {
+      "path": "platform/java21/os-native-1.10.0.jar",
+      "artifactId": "os-native",
+      "groupId": "io.ballerina.stdlib",
+      "version": "1.10.0"
+    },
+    {
+      "path": "platform/java21/io-native-1.8.0.jar",
+      "artifactId": "io-native",
+      "groupId": "io.ballerina.stdlib",
+      "version": "1.8.0"
+    },
+    {
+      "path": "platform/java21/os-compiler-plugin-1.10.0.jar",
+      "artifactId": "os-compiler-plugin",
+      "groupId": "io.ballerina.stdlib",
+      "version": "1.10.0"
+    },
+    {
+      "path": "platform/java21/os-test-utils-1.10.0.jar",
+      "artifactId": "os-test-utils",
+      "groupId": "io.ballerina.stdlib",
+      "version": "1.10.0"
+    }
+  ],
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md"
+}

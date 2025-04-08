@@ -1,0 +1,2 @@
+description: This example is on how to use an HTTP retry client in Ballerina to automatically retry when an erroneous response is received.
+keywords: ballerina, ballerina by examples, bbe, http, resiliency, retry

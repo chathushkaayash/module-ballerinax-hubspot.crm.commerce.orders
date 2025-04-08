@@ -1,0 +1,7 @@
+{
+  "plugin_id": "tcp-plugin",
+  "plugin_class": "io.ballerina.stdlib.tcp.compiler.TcpCompilerPlugin",
+  "dependency_paths": [
+    "compiler-plugin/libs/tcp-compiler-plugin-1.13.0.jar"
+  ]
+}

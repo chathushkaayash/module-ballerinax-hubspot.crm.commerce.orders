@@ -1,0 +1,7 @@
+{
+  "plugin_id": "os-compiler-plugin",
+  "plugin_class": "io.ballerina.stdlib.os.compiler.OSCompilerPlugin",
+  "dependency_paths": [
+    "compiler-plugin/libs/os-compiler-plugin-1.10.0.jar"
+  ]
+}

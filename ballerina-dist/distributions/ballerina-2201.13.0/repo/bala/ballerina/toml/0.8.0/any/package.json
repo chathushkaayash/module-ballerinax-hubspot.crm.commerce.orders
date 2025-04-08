@@ -1,0 +1,40 @@
+{
+  "organization": "ballerina",
+  "name": "toml",
+  "version": "0.8.0",
+  "licenses": [
+    "Apache-2.0"
+  ],
+  "authors": [
+    "Ballerina"
+  ],
+  "source_repository": "https://github.com/ballerina-platform/module-ballerina-toml",
+  "keywords": [
+    "toml"
+  ],
+  "export": [
+    "toml"
+  ],
+  "icon": "docs/icon.png",
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "any",
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md",
+  "modules": [
+    {
+      "name": "toml.parser",
+      "export": false
+    },
+    {
+      "name": "toml.writer",
+      "export": false
+    },
+    {
+      "name": "toml.lexer",
+      "export": false
+    }
+  ]
+}

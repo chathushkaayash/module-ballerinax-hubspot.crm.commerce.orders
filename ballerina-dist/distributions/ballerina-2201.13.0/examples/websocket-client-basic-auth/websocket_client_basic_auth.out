@@ -1,0 +1,2 @@
+$ bal run websocket_client_basic_auth.bal
+Hello, How are you?

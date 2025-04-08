@@ -1,0 +1,2 @@
+description: This example is on how constraint validation can be done to the payload of a service.
+keywords: ballerina, ballerina by example, bbe, http, constraint, validation

@@ -1,0 +1,2 @@
+description: This example demonstrates consuming messages from a RabbitMQ queue using a connection with basic authentication.
+keywords: ballerina, ballerina by example, rabbitmq, ssl, tls, authentication, credentials

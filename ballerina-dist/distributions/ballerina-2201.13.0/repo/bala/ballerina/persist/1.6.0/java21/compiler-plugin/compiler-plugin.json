@@ -1,0 +1,7 @@
+{
+  "plugin_id": "persist-compiler-plugin",
+  "plugin_class": "io.ballerina.stdlib.persist.compiler.PersistCompilerPlugin",
+  "dependency_paths": [
+    "compiler-plugin/libs/persist-compiler-plugin-1.6.0.jar"
+  ]
+}

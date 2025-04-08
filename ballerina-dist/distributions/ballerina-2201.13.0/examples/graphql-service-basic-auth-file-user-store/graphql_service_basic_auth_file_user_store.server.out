@@ -1,0 +1,1 @@
+$ bal run graphql_service_basic_auth_file_user_store.bal

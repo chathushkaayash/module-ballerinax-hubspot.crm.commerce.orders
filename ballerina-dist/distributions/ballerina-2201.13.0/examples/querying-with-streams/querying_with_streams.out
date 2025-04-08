@@ -1,0 +1,2 @@
+$ bal run querying_with_streams.bal
+[2,4,6,8,10]

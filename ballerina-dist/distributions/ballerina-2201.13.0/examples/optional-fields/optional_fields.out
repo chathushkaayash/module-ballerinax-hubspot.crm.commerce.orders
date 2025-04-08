@@ -1,0 +1,5 @@
+$ bal run optional_fields.bal
+Title: Mr
+Middle name: 
+false
+true

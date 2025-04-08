@@ -1,0 +1,78 @@
+{
+  "organization": "ballerina",
+  "name": "protobuf",
+  "version": "1.8.0",
+  "licenses": [
+    "Apache-2.0"
+  ],
+  "authors": [
+    "Ballerina"
+  ],
+  "source_repository": "https://github.com/ballerina-platform/module-ballerina-protobuf",
+  "keywords": [
+    "wrappers"
+  ],
+  "export": [
+    "protobuf",
+    "protobuf.types.any",
+    "protobuf.types.duration",
+    "protobuf.types.empty",
+    "protobuf.types.struct",
+    "protobuf.types.timestamp",
+    "protobuf.types.wrappers"
+  ],
+  "icon": "docs/icon.png",
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "java21",
+  "platformDependencies": [
+    {
+      "path": "platform/java21/protobuf-native-1.8.0.jar",
+      "artifactId": "protobuf-native",
+      "groupId": "io.ballerina.stdlib",
+      "version": "1.8.0"
+    },
+    {
+      "path": "platform/java21/protobuf-java-3.25.5.jar",
+      "artifactId": "protobuf-java",
+      "groupId": "com.google.protobuf",
+      "version": "3.25.5"
+    }
+  ],
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md",
+  "modules": [
+    {
+      "name": "protobuf.types.any",
+      "export": true,
+      "readme": "docs/modules/protobuf.types.any/README.md"
+    },
+    {
+      "name": "protobuf.types.duration",
+      "export": true,
+      "readme": "docs/modules/protobuf.types.duration/README.md"
+    },
+    {
+      "name": "protobuf.types.empty",
+      "export": true,
+      "readme": "docs/modules/protobuf.types.empty/README.md"
+    },
+    {
+      "name": "protobuf.types.struct",
+      "export": true,
+      "readme": "docs/modules/protobuf.types.struct/README.md"
+    },
+    {
+      "name": "protobuf.types.timestamp",
+      "export": true,
+      "readme": "docs/modules/protobuf.types.timestamp/README.md"
+    },
+    {
+      "name": "protobuf.types.wrappers",
+      "export": true,
+      "readme": "docs/modules/protobuf.types.wrappers/README.md"
+    }
+  ]
+}

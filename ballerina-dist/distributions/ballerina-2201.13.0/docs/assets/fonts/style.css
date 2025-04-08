@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Droid Sans Mono';
+  src: url(./DroidSansMono.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url(./SourceCodePro-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}

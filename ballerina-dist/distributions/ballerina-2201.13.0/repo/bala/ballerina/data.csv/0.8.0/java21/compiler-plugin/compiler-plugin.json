@@ -1,0 +1,7 @@
+{
+  "plugin_id": "data.csv-compiler-plugin",
+  "plugin_class": "io.ballerina.lib.data.csvdata.compiler.CsvDataCompilerPlugin",
+  "dependency_paths": [
+    "compiler-plugin/libs/data.csv-compiler-plugin-0.8.0.jar"
+  ]
+}

@@ -1,0 +1,2 @@
+description: This example is on how to configure the chunking behavior of an HTTP service in Ballerina.
+keywords: ballerina, ballerina by example, bbe, http, chunked, transfer-encoding

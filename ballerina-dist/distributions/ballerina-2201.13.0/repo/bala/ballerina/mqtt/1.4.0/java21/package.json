@@ -1,0 +1,53 @@
+{
+  "organization": "ballerina",
+  "name": "mqtt",
+  "version": "1.4.0",
+  "authors": [
+    "ballerina"
+  ],
+  "source_repository": "https://github.com/ballerina-platform/module-ballerina-mqtt",
+  "keywords": [
+    "mqtt",
+    "client",
+    "messaging",
+    "network",
+    "pubsub",
+    "iot"
+  ],
+  "export": [
+    "mqtt"
+  ],
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "java21",
+  "platformDependencies": [
+    {
+      "path": "platform/java21/mqtt-native-1.4.0.jar",
+      "artifactId": "mqtt-native",
+      "groupId": "io.ballerina.stdlib",
+      "version": "1.4.0"
+    },
+    {
+      "path": "platform/java21/org.eclipse.paho.mqttv5.client-1.2.5.jar",
+      "artifactId": "org.eclipse.paho.mqttv5.client",
+      "groupId": "org.eclipse.paho",
+      "version": "1.2.5"
+    },
+    {
+      "path": "platform/java21/bcpkix-jdk18on-1.80.jar",
+      "artifactId": "bcpkix-jdk18on",
+      "groupId": "org.bouncycastle",
+      "version": "1.80"
+    },
+    {
+      "path": "platform/java21/bcutil-jdk18on-1.80.jar",
+      "artifactId": "bcutil-jdk18on",
+      "groupId": "org.bouncycastle",
+      "version": "1.80"
+    }
+  ],
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md"
+}

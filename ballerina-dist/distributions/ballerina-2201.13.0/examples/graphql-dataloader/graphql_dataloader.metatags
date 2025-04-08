@@ -1,0 +1,2 @@
+description: This example demonstrates engaging data loaders with a GraphQL service.
+keywords: ballerina, ballerina by example, bbe, graphql, dataloader, batching, caching

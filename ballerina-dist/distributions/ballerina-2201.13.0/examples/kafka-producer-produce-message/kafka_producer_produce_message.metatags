@@ -1,0 +1,2 @@
+description: This example demonstrates sending messages to a Kafka topic using a kafka:Producer client.
+keywords: ballerina, ballerina by example, bbe, kafka, producer

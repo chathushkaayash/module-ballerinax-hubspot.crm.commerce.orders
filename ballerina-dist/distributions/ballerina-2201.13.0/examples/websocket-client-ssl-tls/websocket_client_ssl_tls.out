@@ -1,0 +1,2 @@
+$ bal run http_client_ssl_tls.bal
+Hello, How are you?

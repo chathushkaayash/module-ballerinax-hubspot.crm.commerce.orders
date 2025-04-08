@@ -1,0 +1,37 @@
+{
+  "organization": "ballerina",
+  "name": "websub",
+  "version": "2.14.0",
+  "licenses": [
+    "Apache-2.0"
+  ],
+  "authors": [
+    "Ballerina"
+  ],
+  "source_repository": "https://github.com/ballerina-platform/module-ballerina-websub",
+  "keywords": [
+    "websub",
+    "subscriber",
+    "service",
+    "listener"
+  ],
+  "export": [
+    "websub"
+  ],
+  "icon": "docs/icon.png",
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "java21",
+  "platformDependencies": [
+    {
+      "path": "platform/java21/websub-native-2.14.0.jar",
+      "artifactId": "websub-native",
+      "groupId": "io.ballerina.stdlib",
+      "version": "2.14.0"
+    }
+  ],
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md"
+}

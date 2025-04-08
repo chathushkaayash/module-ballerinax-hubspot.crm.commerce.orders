@@ -1,0 +1,69 @@
+{
+  "organization": "ballerina",
+  "name": "ftp",
+  "version": "2.13.1",
+  "licenses": [
+    "Apache-2.0"
+  ],
+  "authors": [
+    "Ballerina"
+  ],
+  "source_repository": "https://github.com/ballerina-platform/module-ballerina-ftp",
+  "keywords": [
+    "FTP",
+    "SFTP",
+    "remote file",
+    "file transfer",
+    "client",
+    "service"
+  ],
+  "export": [
+    "ftp"
+  ],
+  "icon": "docs/icon.png",
+  "ballerina_version": "2201.12.0",
+  "implementation_vendor": "WSO2",
+  "language_spec_version": "2024R1",
+  "platform": "java21",
+  "platformDependencies": [
+    {
+      "path": "platform/java21/commons-vfs2-2.10.0.jar",
+      "artifactId": "commons-vfs2",
+      "groupId": "org.apache.commons",
+      "version": "2.10.0"
+    },
+    {
+      "path": "platform/java21/jsch-0.1.55.jar",
+      "artifactId": "jsch",
+      "groupId": "com.jcraft",
+      "version": "0.1.55"
+    },
+    {
+      "path": "platform/java21/commons-net-3.11.1.jar",
+      "artifactId": "commons-net",
+      "groupId": "commons-net",
+      "version": "3.11.1"
+    },
+    {
+      "path": "platform/java21/commons-io-2.18.0.jar",
+      "artifactId": "commons-io",
+      "groupId": "commons-io",
+      "version": "2.18.0"
+    },
+    {
+      "path": "platform/java21/commons-lang3-3.17.0.jar",
+      "artifactId": "commons-lang3",
+      "groupId": "org.apache.commons",
+      "version": "3.17.0"
+    },
+    {
+      "path": "platform/java21/ftp-native-2.13.1-20250328-123000-52b0ab7.jar",
+      "artifactId": "ftp-native",
+      "groupId": "io.ballerina.stdlib",
+      "version": "2.13.1"
+    }
+  ],
+  "graalvmCompatible": true,
+  "template": false,
+  "readme": "docs/README.md"
+}

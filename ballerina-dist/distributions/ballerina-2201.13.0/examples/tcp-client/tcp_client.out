@@ -1,0 +1,2 @@
+$ bal run tcp_client.bal
+Received: Hello Ballerina

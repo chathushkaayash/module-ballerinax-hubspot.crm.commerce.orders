@@ -1,0 +1,7 @@
+{
+  "plugin_id": "websub-compiler-plugin",
+  "plugin_class": "io.ballerina.stdlib.websub.WebSubCompilerPlugin",
+  "dependency_paths": [
+    "compiler-plugin/libs/websub-compiler-plugin-2.14.0.jar"
+  ]
+}

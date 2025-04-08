@@ -78,7 +78,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -176,7 +183,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -206,7 +220,14 @@
             "content" : { }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -262,7 +283,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -294,7 +322,14 @@
             "content" : { }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -342,7 +377,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -390,7 +432,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -491,7 +540,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -528,7 +584,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -576,7 +639,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {
@@ -613,7 +683,14 @@
             }
           },
           "default" : {
-            "$ref" : "#/components/responses/Error"
+            "description" : "An error occurred.",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "security" : [ {

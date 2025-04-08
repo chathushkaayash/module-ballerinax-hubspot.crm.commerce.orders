@@ -32,6 +32,11 @@ on:
         required: false
         type: string
         default: ""
+      auto-merge:
+        description: "Enable auto-merge of the PR"
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   call_workflow:
@@ -46,3 +51,4 @@ jobs:
       align-openapi: ${{ inputs.align-openapi }}
       additional-align-flags: ${{ inputs.additional-align-flags  }}
       distribution-zip: ${{ inputs.distribution-zip }}
+      auto-merge: ${{ inputs.auto-merge }}

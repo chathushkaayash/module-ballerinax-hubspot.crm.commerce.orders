@@ -14,20 +14,6 @@ public type StandardError record {
     string status;
 };
 
-# Represents the Queries record for the operation: get-/crm/v3/objects/orders/{orderId}
-public type GetCrmV3ObjectsOrdersOrderIdQueries record {
-    # A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
-    string[] associations?;
-    # Whether to return only results that have been archived.
-    boolean archived = false;
-    # A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
-    string[] propertiesWithHistory?;
-    # The name of a property whose values are unique for this object type
-    string idProperty?;
-    # A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
-    string[] properties?;
-};
-
 public type CollectionResponseAssociatedId record {
     Paging paging?;
     AssociatedId[] results;
@@ -78,6 +64,20 @@ public type ErrorDetail record {
     record {|string[]...;|} context?;
     # A human readable message describing the error along with remediation steps where appropriate
     string message;
+};
+
+# Represents the Queries record for the operation: get-/crm/v3/objects/orders/{orderId}
+public type GetCrmV3ObjectsOrdersOrderidQueries record {
+    # A comma separated list of object types to retrieve associated IDs for. If any of the specified associations do not exist, they will be ignored.
+    string[] associations?;
+    # Whether to return only results that have been archived.
+    boolean archived = false;
+    # A comma separated list of the properties to be returned along with their history of previous values. If any of the specified properties are not present on the requested object(s), they will be ignored.
+    string[] propertiesWithHistory?;
+    # The name of a property whose values are unique for this object type
+    string idProperty?;
+    # A comma separated list of the properties to be returned in the response. If any of the specified properties are not present on the requested object(s), they will be ignored.
+    string[] properties?;
 };
 
 public type ForwardPaging record {
@@ -194,13 +194,16 @@ public type ConnectionConfig record {|
     http:ProxyConfig proxy?;
     # Enables the inbound payload validation functionality which provided by the constraint package. Enabled by default
     boolean validation = true;
-    # Enables relaxed data binding on the client side. When enabled, `nil` values are treated as optional, 
-    # and absent fields are handled as `nilable` types. Enabled by default.
-    boolean laxDataBinding = true;
 |};
 
 public type PublicObjectId record {
     string id;
+};
+
+# Represents the Queries record for the operation: patch-/crm/v3/objects/orders/{orderId}
+public type PatchCrmV3ObjectsOrdersOrderidQueries record {
+    # The name of a property whose values are unique for this object type
+    string idProperty?;
 };
 
 public type Paging record {
@@ -272,12 +275,6 @@ public type SimplePublicObjectWithAssociations record {
     string id;
     record {|string?...;|} properties;
     string updatedAt;
-};
-
-# Represents the Queries record for the operation: patch-/crm/v3/objects/orders/{orderId}
-public type PatchCrmV3ObjectsOrdersOrderIdQueries record {
-    # The name of a property whose values are unique for this object type
-    string idProperty?;
 };
 
 public type Filter record {

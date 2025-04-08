@@ -1,13 +1,44 @@
 name: Regenerate openapi-connector
 
 on:
-    workflow_dispatch:
-    repository_dispatch:
-        types: [ stdlib-release-pipeline ]
+  workflow_dispatch:
+    inputs:
+      openapi-url:
+        description: "URL of the OpenAPI JSON"
+        required: false
+        type: string
+      flatten-openapi:
+        description: "Enable OpenAPI Flattening"
+        required: false
+        type: boolean
+        default: false
+      additional-flatten-flags:
+        description: "Additional flags for OpenAPI Flattening"
+        required: false
+        type: string
+        default: ""
+      align-openapi:
+        description: "Enable OpenAPI Alignment"
+        required: false
+        type: boolean
+        default: false
+      additional-align-flags:
+        description: "Additional flags for OpenAPI Alignment"
+        required: false
+        type: string
+        default: ""
+  repository_dispatch:
+    types: [stdlib-release-pipeline]
 
 jobs:
-    call_workflow:
-        name: Run Regenerate Connector Workflow
-        # if: ${{ github.repository_owner == 'ballerina-platform' }}
-        uses: chathushkaayash/ballerina-library/.github/workflows/regenerate-connector-template.yml@main
-        secrets: inherit
+  call_workflow:
+    name: Run Regenerate Connector Workflow
+    # if: ${{ github.repository_owner == 'ballerina-platform' }}
+    uses: chathushkaayash/ballerina-library/.github/workflows/regenerate-connector-template.yml@main
+    secrets: inherit
+    with:
+      openapi-url: ${{ github.event.inputs.openapi-url || github.event.client_payload.openapi_url }}
+      flatten-openapi: ${{ github.event.inputs.flatten-openapi || github.event.client_payload.flatten_openapi }}
+      additional-flatten-flags: ${{ github.event.inputs.additional-flatten-flags || github.event.client_payload.additional_flatten_flags }}
+      align-openapi: ${{ github.event.inputs.align-openapi || github.event.client_payload.align_openapi }}
+      additional-align-flags: ${{ github.event.inputs.additional-align-flags || github.event.client_payload.additional_align_flags }}

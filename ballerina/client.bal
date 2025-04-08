@@ -28,7 +28,7 @@ public isolated client class Client {
     # + serviceUrl - URL of the target service 
     # + return - An error if connector initialization failed 
     public isolated function init(ConnectionConfig config, string serviceUrl = "https://api.hubapi.com/crm/v3/objects/orders") returns error? {
-        http:ClientConfiguration httpClientConfig = {httpVersion: config.httpVersion, timeout: config.timeout, forwarded: config.forwarded, poolConfig: config.poolConfig, compression: config.compression, circuitBreaker: config.circuitBreaker, retryConfig: config.retryConfig, validation: config.validation};
+        http:ClientConfiguration httpClientConfig = {httpVersion: config.httpVersion, timeout: config.timeout, forwarded: config.forwarded, poolConfig: config.poolConfig, compression: config.compression, circuitBreaker: config.circuitBreaker, retryConfig: config.retryConfig, validation: config.validation, laxDataBinding: config.laxDataBinding};
         do {
             if config.http1Settings is ClientHttp1Settings {
                 ClientHttp1Settings settings = check config.http1Settings.ensureType(ClientHttp1Settings);
@@ -61,35 +61,23 @@ public isolated client class Client {
         return;
     }
 
-    # Archive
-    #
-    # + headers - Headers to be sent with the request 
-    # + return - No content 
-    resource isolated function delete [string orderId](map<string|string[]> headers = {}) returns http:Response|error {
-        string resourcePath = string `/${getEncodedUri(orderId)}`;
-        map<anydata> headerValues = {...headers};
-        if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["private-app"] = self.apiKeyConfig?.private\-app;
-        }
-        map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
-        return self.clientEp->delete(resourcePath, headers = httpHeaders);
-    }
-
-    # List
+    # Read a batch of orders by internal ID, or unique property values
     #
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function get .(map<string|string[]> headers = {}, *GetCrmV3ObjectsOrdersQueries queries) returns CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error {
-        string resourcePath = string `/`;
+    resource isolated function post batch/read(BatchReadInputSimplePublicObjectId payload, map<string|string[]> headers = {}, *PostCrmV3ObjectsOrdersBatchReadQueries queries) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
+        string resourcePath = string `/batch/read`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
         }
-        map<Encoding> queryParamEncoding = {"properties": {style: FORM, explode: true}, "propertiesWithHistory": {style: FORM, explode: true}, "associations": {style: FORM, explode: true}};
-        resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
+        resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
-        return self.clientEp->get(resourcePath, httpHeaders);
+        http:Request request = new;
+        json jsonBody = payload.toJson();
+        request.setPayload(jsonBody, "application/json");
+        return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
     # Read
@@ -107,6 +95,20 @@ public isolated client class Client {
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
         return self.clientEp->get(resourcePath, httpHeaders);
+    }
+
+    # Archive
+    #
+    # + headers - Headers to be sent with the request 
+    # + return - No content 
+    resource isolated function delete [string orderId](map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/${getEncodedUri(orderId)}`;
+        map<anydata> headerValues = {...headers};
+        if self.apiKeyConfig is ApiKeysConfig {
+            headerValues["private-app"] = self.apiKeyConfig?.private\-app;
+        }
+        map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Update
@@ -128,28 +130,11 @@ public isolated client class Client {
         return self.clientEp->patch(resourcePath, request, httpHeaders);
     }
 
-    # Create
-    #
-    # + headers - Headers to be sent with the request 
-    # + return - successful operation 
-    resource isolated function post .(SimplePublicObjectInputForCreate payload, map<string|string[]> headers = {}) returns SimplePublicObject|error {
-        string resourcePath = string `/`;
-        map<anydata> headerValues = {...headers};
-        if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["private-app"] = self.apiKeyConfig?.private\-app;
-        }
-        map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
-        http:Request request = new;
-        json jsonBody = payload.toJson();
-        request.setPayload(jsonBody, "application/json");
-        return self.clientEp->post(resourcePath, request, httpHeaders);
-    }
-
     # Archive a batch of orders by ID
     #
     # + headers - Headers to be sent with the request 
     # + return - No content 
-    resource isolated function post batch/archive(BatchInputSimplePublicObjectId payload, map<string|string[]> headers = {}) returns http:Response|error {
+    resource isolated function post batch/archive(BatchInputSimplePublicObjectId payload, map<string|string[]> headers = {}) returns error? {
         string resourcePath = string `/batch/archive`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
@@ -179,18 +164,16 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Read a batch of orders by internal ID, or unique property values
+    # Update a batch of orders
     #
     # + headers - Headers to be sent with the request 
-    # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function post batch/read(BatchReadInputSimplePublicObjectId payload, map<string|string[]> headers = {}, *PostCrmV3ObjectsOrdersBatchReadQueries queries) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
-        string resourcePath = string `/batch/read`;
+    resource isolated function post batch/update(BatchInputSimplePublicObjectBatchInput payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
+        string resourcePath = string `/batch/update`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
         }
-        resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
@@ -198,12 +181,29 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Update a batch of orders
+    # List
+    #
+    # + headers - Headers to be sent with the request 
+    # + queries - Queries to be sent with the request 
+    # + return - successful operation 
+    resource isolated function get .(map<string|string[]> headers = {}, *GetCrmV3ObjectsOrdersQueries queries) returns CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error {
+        string resourcePath = string `/`;
+        map<anydata> headerValues = {...headers};
+        if self.apiKeyConfig is ApiKeysConfig {
+            headerValues["private-app"] = self.apiKeyConfig?.private\-app;
+        }
+        map<Encoding> queryParamEncoding = {"properties": {style: FORM, explode: true}, "propertiesWithHistory": {style: FORM, explode: true}, "associations": {style: FORM, explode: true}};
+        resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
+        map<string|string[]> httpHeaders = http:getHeaderMap(headerValues);
+        return self.clientEp->get(resourcePath, httpHeaders);
+    }
+
+    # Create
     #
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
-    resource isolated function post batch/update(BatchInputSimplePublicObjectBatchInput payload, map<string|string[]> headers = {}) returns BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error {
-        string resourcePath = string `/batch/update`;
+    resource isolated function post .(SimplePublicObjectInputForCreate payload, map<string|string[]> headers = {}) returns SimplePublicObject|error {
+        string resourcePath = string `/`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;

@@ -52,7 +52,7 @@ jobs:
   call_workflow:
     name: Run Regenerate Connector Workflow
     if: ${{ github.repository_owner == 'ballerina-platform' }}
-    uses: chathushkaayash/ballerina-library/.github/workflows/regenerate-connector-template.yml@main
+    uses: ballerina-platform/ballerina-library/.github/workflows/regenerate-connector-template.yml@main
     secrets: inherit
     with:
       openapi-url: ${{ inputs.openapi-url }}

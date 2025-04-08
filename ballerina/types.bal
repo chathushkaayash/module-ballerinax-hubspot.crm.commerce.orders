@@ -263,12 +263,6 @@ public type AssociationSpec record {
     int:Signed32 associationTypeId;
 };
 
-# Represents the Queries record for the operation: patch-/crm/v3/objects/orders/{orderId}
-public type PatchCrmV3ObjectsOrdersOrderIdQueries record {
-    # The name of a property whose values are unique for this object type
-    string idProperty?;
-};
-
 public type SimplePublicObjectWithAssociations record {
     record {|CollectionResponseAssociatedId...;|} associations?;
     string createdAt;
@@ -278,6 +272,12 @@ public type SimplePublicObjectWithAssociations record {
     string id;
     record {|string?...;|} properties;
     string updatedAt;
+};
+
+# Represents the Queries record for the operation: patch-/crm/v3/objects/orders/{orderId}
+public type PatchCrmV3ObjectsOrdersOrderIdQueries record {
+    # The name of a property whose values are unique for this object type
+    string idProperty?;
 };
 
 public type Filter record {
